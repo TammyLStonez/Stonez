@@ -1,0 +1,772 @@
+/* ---- Reset & variables ---- */
+ /* FIXED CSS RESET */
+:root {
+    --bg: #0e0e0e;
+    --panel: #000000;
+    --muted: #bdbdbd;
+    --muted-2: #8b8b8b;
+    --white: #ffffff;
+    --accent: #e6e6e6;
+    --radius: 30px;
+    --container-padding: 0 2rem;
+    --max-width: 1600px;
+    --text-gradient: linear-gradient(135deg, #00ffff 0%,  #8a2be2 100%);
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---- Base ---- */
+html,body { height: 100%; scroll-behavior: smooth;}
+body{
+    font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: var(--bg);
+    color: var(--muted);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+    padding-top: 82px; /* space for fixed nav */
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 100%;
+    position: relative;
+}
+.skip-link{
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus{
+    left: 10px;
+    top: 10px;
+    width: auto;
+    height: auto;
+    padding: 8px 12px;
+    background: var(--text-gradient);
+    color: #000;
+    font-weight: 600;
+    z-index: 10000;
+    border-radius: 4px;
+}
+
+/*-- Navbar styling --*/
+.site-nav{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 80px;
+    top: 0;
+    background: linear-gradient(180deg,  50%, rgba(0, 0, 0, 0) 100%);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+}
+
+/* -- A simple container inside the navbar -- */
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: var(--max-width);
+    padding: 0 2rem;
+}
+
+/* -- Navbar Logo-- */
+.nav-logo{
+    font-weight: 800;
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* -- Menu Buttton -- */
+.menubar-toggle{
+    display: none;
+    background: transparent;
+    padding: 0px;
+    border: none;
+    cursor: pointer;
+}
+.menubar-toggle .bar{
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    border-radius: var(--radius);
+    background: var(--text-gradient);
+    transition: all 0.5s ease-in-out;
+}
+/* -- Overlay for menu-bar -- */
+.menu-overlay{
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    position: fixed;
+    inset: 0;
+    z-index: 990;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .18s ease-in-out;
+}
+.menu-overlay.active{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --Nav Links-- */
+.nav-menu{
+    list-style: none;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 1rem;
+}
+.nav-menu li a{
+    text-decoration: none;
+    font-size: 0.7rem;
+    padding: 2px 20px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    transition: all .18s ease;
+    position: relative;/*Important for ::before pseudo element positioning. Others are as follows...*/
+    justify-content: center;
+    text-align: center;
+    display: flex;
+}
+.nav-menu a:hover, .nav-menu a:focus{
+    background: var(--text-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;/* Target webkit specifically */
+    background-clip: text; /* Add gradient on hover */
+    transform: translateY(-1px);
+}
+
+/* --- Styling for bottom border animation ---*/
+.nav-menu a::before{
+    content: "";
+    position: absolute;
+    background-image: var(--text-gradient);
+    width: 0;
+    height: 3px;
+    top: 20px;
+    border-radius: 1000px;
+    transition: .18s;
+    opacity: 0;
+}
+.nav-menu a:hover::before{
+    width: calc(55% + 8px);
+    opacity: 1;
+}
+.nav-menu a:focus::before{
+    width: 70%;
+    opacity: 1;
+}
+.nav-menu a:active::before{
+    width: 50%;
+    opacity: 1;
+}
+
+/* --Let's Chat-- */
+.chat-btn{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--bg);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1.6px;
+    padding: 1em 2em;
+    background: var(--text-gradient);
+    border-radius: 30px;
+    border: none;
+    transition: 0.18s;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.chat-btn:hover{
+    color: var(--white);
+    background: var(--bg);
+    box-shadow: -5px -3px 15px #00ffff, 5px 3px 15px #8a2be2;
+}
+
+/*
+.chat-btn.active::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 30px;
+    background-color: rgba(59, 59, 59, 0.461);
+    clip-path: circle(0% at 50% 50%);
+    transition: 0.18s;
+    z-index: 1;
+}
+.chat-btn.active:focus::after{
+    clip-path: circle(100% at 50% 50%);
+}
+*/
+
+/* ---HERO SECTION--- */
+/* Hero sections should be positioned below nav */
+.hero{
+    min-height: 100vh;
+    padding: 0 30px;
+    /* Add padding-top to push the hero below the nav bar */
+    padding-top: 82px; /* same as body padding-top */
+    /* Remove any margin-top that might cause overlap */
+    padding-bottom: 20px;
+    margin-top: 0;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: var(--panel) 4px solid;
+}
+.hero-content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    align-items: center;
+    max-width: var(--max-width);
+    justify-content: space-evenly;
+    gap: 30px;
+}
+
+/* --A simple container that contains the picture and the links orbiting around the picture*/
+.pic-frame{
+    position: relative;
+    height: clamp(200px, 30vw, 300px);
+    width: clamp(200px, 30vw, 300px);
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    animation: bounce 3s linear infinite;
+    transition: all .18s ease;
+}
+.profile-pic{
+    width: clamp(200px, 30vw, 300px);
+    height: clamp(200px, 30vw, 300px);
+    position: absolute;
+    padding: 20px;
+    border-radius: 40%;
+    z-index: 100;
+}
+div.link{
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border-radius: 40%;
+    animation: link-rotate 5s linear infinite;
+    transition: all 0.18s ease;
+    z-index: 1;
+}
+div.ring1{
+    border: 3px solid #00ffff;
+    box-shadow: 0 0 10px #55ffff;
+    animation-delay: 1ms;
+}
+div.ring2{
+    border: 3px solid #8a2be2;
+    box-shadow: 0 0 10px #a84cff;
+    animation-delay: 3ms;
+    animation-direction: reverse;
+}
+@keyframes link-rotate {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+@keyframes bounce{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(10px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+.intro_text{
+    width: 600px;
+    animation: detail-box 2s ease;
+    transition: all 0.5s ease-in-out;
+}
+.intro_text h2{
+    font-size: clamp(0.8rem, 7vw, 2rem);
+}
+.intro_text h1{
+    font-size: clamp(1rem, 7vw, 2rem);
+}
+.text-show, .gradient-text{
+    background: var(--text-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.cursor_text{
+    font-size: clamp(1rem, 6vw, 2rem);
+    display: flex;
+    flex-direction: column;
+}
+.cursor_text .text-show{
+    display: inline-block;
+    animation: display-text 8s linear infinite;
+    animation-delay: calc(-2s * var(--i));
+}
+.cursor_text .web-dev{
+    display: block;
+}
+.cursor_text .hide{
+    display: inline-block;
+}
+@keyframes display-text{
+    25%,100%{
+        display: none;
+    }
+}
+.hero-intro{
+    font-size: clamp(0.8rem, 4vw, 1rem);
+}
+.social-icons{
+    display: flex;
+    max-width: fit-content;
+    gap: 10px;
+    bottom: 20px;
+}
+.social-icons a{
+    font-size: clamp(20px, 5vw, 30px);
+    transition: all 0.18s;
+    color: var(--muted);
+    border-radius: 100%;
+    padding: 3px 6px;
+}
+.social-icons a:hover{
+    transform: translateY(-2px);
+    color: var(--accent);
+}
+
+/* -- Icon hover --
+.social-icons a:hover .fa-facebook-f:hover{
+    color: #009dff;
+    transition: all .18s ease;
+}
+.fa-telegram:hover{
+    color: #009dff;
+    transition: all .18s ease;
+}
+.fa-discord:hover{
+    color: #7b00ff;
+    transition: all .18s ease;
+}
+.fa-linkedin-in:hover{
+    color: #0088ff;
+    transition: all .18s ease;
+}
+.fa-github:hover{
+    color: #000000;
+    transition: all .18s ease;
+}
+*/
+
+.btn{
+    font-size: clamp(0.5rem, 3.5vw, 0.8rem);
+    padding: 1em 2em;
+    position: relative;
+    color: var(--muted);
+    background-color: var(--bg);
+    border-radius: 40px;
+    border: none;
+    transition: 0.18s;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn:hover{
+    box-shadow: -5px -3px 15px #00ffff, 5px 3px 15px #8a2be2;
+    color: var(--bg);
+    transition: 0.18s;
+    background: var(--text-gradient);
+    transform: translateY(-1px);
+}
+.btn:before{
+    content: "";
+    position: absolute;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    background: var(--text-gradient);
+    border-radius: 40px;
+    z-index: -1;
+}
+.btn::after{
+    content: "";
+    position: absolute;
+    background: var(--bg);
+    inset: .1px;
+    border-radius: 40px;
+    z-index: -1;
+}
+.btn:hover::after{
+    transition: 0.18s;
+    background: var(--text-gradient);
+}
+
+/* -- Former button styling 2
+.btn{
+    padding: 1em 2em;
+    position: relative;
+    color: var(--muted);
+    background-color: var(--bg);
+    border-radius: 40px;
+    border: none;
+    transition: 0.5s;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn:hover{
+    box-shadow: -5px -3px 15px #00ffff, 5px 3px 15px #8a2be2;
+    color: var(--bg);
+    transition: 0.18s;
+    background: var(--text-gradient);
+}
+.btn:before{
+    content: "";
+    position: absolute;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    background: var(--text-gradient);
+    border-radius: 40px;
+    z-index: -1;
+}
+*/
+
+/* -- Old button styling--
+.btn{
+    padding: 1em 2em;
+    position: relative;
+    color: var(--muted);
+    background-color: var(--bg);
+    border-radius: 40px;
+    border: none;
+    transition: 0.5s;
+    cursor: pointer;
+    transition: 0.75s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn::after{
+    content: "";
+    position: absolute;
+    width: 103%;
+    height: 107%;
+    border-radius: 40px;
+    background: var(--text-gradient);
+    transition: 0.75s;
+    z-index: -1;
+}
+.btn:hover::after{
+    z-index: 1;
+}
+
+ --Glow-- 
+.btn::before{
+    content: "";
+    background-image: var(--text-gradient);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 600%;
+    z-index: -1;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    filter: blur(8px);
+    transition: .3s ease-in-out;
+    border-radius: 1000px;
+    opacity: 0;
+}
+.btn:hover::before{
+    opacity: 1;
+    box-shadow: -10px -5px 30px #00ffff, 10px 5px 30px #8a2be2;
+}
+*/
+
+/* --About-- */
+.about{
+    min-height: 100vh;
+}
+.about-content{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    max-width: var(--max-width);
+    gap: 30px;
+}
+.about-text{
+    height: fit-content;
+    max-width: 400px;
+}
+.about-text .about-header{
+    font-size: clamp(1rem, 7vw, 2rem);
+}
+.about-text .about-paragraph{
+    font-size: clamp(0.8rem, 2vw, 1rem);
+}
+.about-text .read-more{
+    text-decoration: none;
+}
+
+/* -- SERVICES --*/
+.services{
+    min-height: 100vh;
+    padding-top: 50px;
+}
+.services-inner{
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.service-header{
+    position: relative;
+    padding: 0 2px;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 1.6px;
+    transition: all .18s ease;
+}
+.service-header::before {
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 8%;
+    top: 95%;
+    background: var(--text-gradient);
+    z-index: -1;
+    border-radius: 40px;
+}
+.service-card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 0 auto;
+    padding: 20px 10px;
+}
+.service-card-container .cards {
+    max-width: 230px;
+    max-height: fit-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 20px;
+    background: var(--bg);
+    cursor: pointer;
+    transition: all .18s;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.cards::before{
+    content: "";
+    position: absolute;
+    background: var(--text-gradient);
+    height: 500px;
+    width: 170px;
+    z-index: 1;
+    animation: border-rotate 6s linear infinite;
+    opacity: 0
+}
+.cards:hover::before{
+    opacity: 1;
+    transition: all .18s;
+}
+.cards:hover {
+    transform: scale(1.02);
+    color: var(--accent);
+}
+.cards::after{
+    content: "";
+    position: absolute;
+    background: var(--bg);
+    inset: 2px;
+    z-index: 1;
+    border-radius: 18px;
+}
+@keyframes border-rotate {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+.cards h3{
+    font-size: clamp(0.5em, 5vw, 1.1em);
+    z-index: 2;
+    padding-bottom: 10px;
+}
+.cards p{
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    z-index: 2;
+}
+.cards .fas{
+    z-index: 2;
+    font-size: clamp(2em, 5vw, 2.3em);
+}
+.cards .btn{
+    padding: 0.6em 1.2em;
+    z-index: 2;
+}
+.cards .btn:hover::after{
+    transition: 0.18s;
+    background: var(--text-gradient);
+}
+/*
+.services-inner{
+    display: contents;
+    align-items: center;
+    justify-content: space-evenly;
+    max-width: var(--max-width);
+    text-align: center;
+}
+.service-text{
+}
+.service-card-container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: var(--max-width);
+    justify-content: space-evenly;
+    gap: 20px;
+}
+.cards{
+    height: fit-content;
+    width: 100px;
+    
+}
+
+
+.portfolio{
+    padding-top: 802px;
+    margin-top: 0;
+}
+*/
+
+/* -- Portfolio -- */
+.portfolio{
+    min-height: 100vh;
+    padding-top: 50px;
+}
+.portfolio-inner{
+    padding: 0;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.portfolio-header{
+    position: relative;
+    padding: 0 2px;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 1.6px;
+    transition: all .18s ease;
+}
+.portfolio-header::before {
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 8%;
+    top: 95%;
+    background: var(--text-gradient);
+    z-index: -1;
+    border-radius: 40px;
+}
+
+
+/* -- Contact -- */
+
+/* -- Responsiveness -- */
+@media (max-width: 880px) {
+    body{
+        padding-top: 60px;
+    }
+    .container .nav-menu{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.7rem !important;
+        position: absolute;
+        height: 100vh;
+        width: 200px;
+        top: 0;
+        right: -100%;
+        padding: 5rem 1.5rem;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        background-color: var(--bg);
+        transition: all 500ms ease-out;
+    }
+    .container .nav-menu.active{
+        display: flex;
+        right: 0%;
+    }
+    .nav-menu a::before, .nav-menu a:hover::before{
+        display: none;
+    }
+    .menubar-toggle{
+        display: block;
+        z-index: 999;
+    }
+    .menubar-toggle.active .bar:nth-child(2){
+        opacity: 0;
+    }
+    .menubar-toggle.active .bar:nth-child(1){
+        transform: translateY(8px) rotate(45deg);
+    }
+    .menubar-toggle.active .bar:nth-child(3){
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    .hero{
+        padding-top: 60px;
+    }
+    .cursor_text .text-show .hide{
+        display: none;
+    }
+}

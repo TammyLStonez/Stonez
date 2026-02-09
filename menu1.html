@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        :root{
+            --primary-color: #11121a;
+            --hover-color: #272832;
+            --accent-color: #0071ff;
+            --text-color: #c9c9c9;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body{
+            color: var(--text-color);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        body{
+            min-height: 100vh;
+            min-height: 100dvh;
+            background-color: var(--primary-color);
+        }
+        main{
+            padding: min(5em, 7%);
+        }
+        main p{
+            margin-top: .35em;
+        }
+        nav{
+            background-color: var(--primary-color);
+            border-bottom: 1px solid var(--hover-color);
+        }
+        nav ul{
+            list-style: none;
+            display: flex;
+        }
+        nav .home-li{
+            margin-right: auto;
+        }
+        nav li{
+            display: flex;
+        }
+        nav a{
+            display: flex;
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 1em 2em;
+            transition: background-color 300ms ease;
+        }
+        nav a:hover{
+            background-color: var(--hover-color);
+        }
+        nav a.active-link{
+            border-bottom: 2px solid var(--text-color);
+        }
+        nav a.accent-link{
+            background-color: var(--accent-color);
+        }
+        #open-sidebar{
+            display: none;
+            background: none;
+            border: none;
+            padding: 1em;
+            margin-left: auto;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        #close-sidebar{
+            display: none;
+            margin-left: auto;
+            background: none;
+            border: none;
+            padding: 1em;
+            cursor: pointer;
+        }
+        #overlay{
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            inset: 0;
+            z-index: 9;
+            display: none;
+        }
+        @media screen and (max-width:700px) {
+            nav{
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: min(15em, 100%);
+                z-index: 10;
+                border-left: 1px solid var(--hover-color);
+                transition: right 500ms ease-out;
+            }
+            nav.show{
+                right: 0;
+            }
+            nav.show ~ #overlay{
+                display: block;
+            }
+            nav ul{
+                width: 100%;
+                flex-direction: column;
+            }
+            nav a{
+                width: 100%;
+                padding-left: 2.5em;
+            }
+            nav .home-li{
+                margin-right: unset;
+            }
+            #open-sidebar{
+                display: block;
+            }
+            #close-sidebar{
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="open-sidebar" onclick="openSidebar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="navbar">
+        ☰
+    </button>
+    <nav class="navbar" id="navbar">
+        <ul class="nav-links">
+            <li>
+                <button id="close-sidebar" onclick="closeSidebar()" aria-label="Close Sidebar">
+                    ✖️
+                </button>
+            </li>
+            <li class="home-li"><a href="#" class="active-link" aria-current="page">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#login" class="accent-link">Login</a></li>
+        </ul>
+    </nav>
+
+    <div id="overlay" onclick="closeSidebar()" aria-hidden="true"></div>
+
+    <main>
+        <div class="hero">
+            <h1>Accessible Navbar</h1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam, fugit quae natus totam odio sed reiciendis sunt earum quis aperiam dicta? Eligendi fugit, deserunt vitae assumenda nemo voluptatum quo ipsa!</p>
+        </div>
+        <div id="about">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam rerum minus dolor minima delectus quod optio, autem consectetur non provident possimus fugiat a nostrum assumenda est suscipit esse omnis tempore.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla officiis voluptate hic, sunt eos laudantium unde. Iusto iste quis asperiores, ab ipsa similique quam possimus! Quaerat alias minus similique molestiae.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim optio sunt hic praesentium neque repellat corporis ipsa, consequuntur voluptas autem doloribus error ab veniam nam. Maxime soluta saepe iste fugiat?
+        </div>
+        <div id="features">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque necessitatibus aperiam ratione nemo. Facere consequatur pariatur iure ipsum quasi laudantium aut. Quo perferendis soluta minima reiciendis totam autem obcaecati commodi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi praesentium aspernatur veniam fuga ea adipisci qui, reprehenderit repellat dolores dicta delectus culpa nam placeat maxime perferendis magni quos, distinctio reiciendis!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ea eius, quo maiores molestias, ducimus magni saepe doloremque consequuntur cupiditate tenetur possimus doloribus ipsam provident hic fugit dolorem atque omnis?
+        </div>
+        <div id="pricing">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum aut, veritatis velit dignissimos esse rem laborum recusandae exercitationem ducimus ab, nulla ratione. Minus harum doloribus iure possimus autem, fuga quaerat!
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo soluta unde consequuntur iure nobis et sunt fuga sed voluptates quaerat ut, itaque officiis ab a accusantium. Tenetur quis numquam natus.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia repudiandae quis reprehenderit incidunt beatae possimus amet, quaerat sint accusantium totam magni sequi tenetur atque debitis commodi suscipit inventore impedit unde.
+        </div>
+        <div id="login">
+            <form action="">
+                <input type="email" name="" id="">
+                <input type="password" name="" id="">
+                <input type="checkbox" name="" id="">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const openButton = document.getElementById('open-sidebar')
+        const navbar = document.getElementById('navbar')
+        const media = window.matchMedia("(width < 700px)")
+
+        media.addEventListener('change', (e) => updateNavbar(e))
+        
+        function updateNavbar(e){
+            const isMobile = e.matches
+            console.log(isMobile)
+            if(isMobile){
+                navbar.setAttribute('inert', '')
+            }
+            else{
+                //desktop device
+                navbar.removeAttribute('inert')
+            }
+        }
+        function openSidebar(){
+            navbar.classList.add('show')
+            openButton.setAttribute('aria-expanded', 'true')
+            navbar.removeAttribute('inert')
+        }
+        function closeSidebar(){
+            navbar.classList.remove('show')
+            openButton.setAttribute('aria-expanded', 'false')
+            navbar.setAttribute('inert', '')
+        }
+
+        const navLinks = document.querySelectorAll('nav a')
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                closeSidebar()
+            })
+        })
+
+        updateNavbar(media)
+    </script>
+</body>
+</html>

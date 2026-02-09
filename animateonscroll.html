@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animate on scroll</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        body{
+            background-color: whitesmoke;
+            display: list-item;
+        }
+        div.box{
+            position: relative;
+            animation: scroll-away 2s ease;
+        }
+        div.left{
+            position: absolute;
+            background-color: darkblue;
+            width: 65%;
+            height: 632px;
+            border-top-right-radius: 300px;
+            border-bottom-right-radius: 150%;
+            border-right: solid 2px;
+            animation: left-div 2s ease;
+            transition: all 0.5s ease-in-out;
+        }
+        @keyframes left-div {
+            0%{
+                opacity: 0;
+                margin-left: -100%;
+            }
+        }
+        div.right{
+            justify-self: right;
+            position: absolute;
+            background-color: darkred;
+            width: 100%;
+            height: 632px;
+            border-top-left-radius: 55%;
+            border-bottom-left-radius: 250px;
+            animation: right-div 2s ease;
+            transition: all 0.5s ease-in-out;
+        }
+        @keyframes right-div     {
+            0%{
+                opacity: 1;
+                overflow: hidden;
+                margin-right: 0%;
+            }
+        }
+        @keyframes right-div {
+            0%{
+                opacity: 0;
+                margin-right: -100%;
+                overflow: hidden;
+            }
+        }
+        .dpp{
+            justify-self: right;
+            margin-right: 8%;
+            margin-top: 10%;
+            position: relative;
+            height: 300px;
+            width: 300px;
+            animation: dp-box 2s ease;
+            transition: all 0.5s ease-in-out;
+        }
+        .dpp:hover{
+            transform: scale(1.1);
+            transition: all 0.5s ease-in-out;
+        }
+        .dp{
+            position: absolute;
+            padding: 40px;
+            border-radius: 100%;
+        }
+        @keyframes  dp-box{
+            0%{
+                opacity: 0;
+                margin-right: 1%;
+                overflow: hidden;
+            }
+        }
+        div.link{
+            position: absolute;
+            height: inherit;
+            width: inherit;
+            animation: link-rotate 5s linear infinite;
+            transition: all 0.5s ease-in-out;
+        }
+        div.ring1{
+            background-color: transparent;
+            border: 3px solid blue;
+            box-shadow: 0 0 20px rgba(0, 0, 255, 0.7);
+            border-top-left-radius: 180px;
+            border-top-right-radius: 100px;
+            border-bottom-left-radius: 100px;
+            border-bottom-right-radius: 180px;
+            animation-delay: 2s;
+        }
+        div.ring2{
+            background-color: transparent;
+            border: 3px solid green;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);
+            border-top-left-radius: 180px;
+            border-top-right-radius: 100px;
+            border-bottom-left-radius: 100px;
+            border-bottom-right-radius: 180px;
+            animation-delay: 3s;
+        }
+        div.ring3{
+            background-color: transparent;
+            border: 3px solid yellow;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.7);
+            border-top-left-radius: 180px;
+            border-top-right-radius: 100px;
+            border-bottom-left-radius: 100px;
+            border-bottom-right-radius: 180px;
+            animation-delay: 3.8s;
+        }
+        @keyframes link-rotate {
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+        .dt{
+            padding: 50px;
+            margin-left: 10%;
+            margin-top: 20%;
+            position: -webkit-sticky;
+            height: fit-content;
+            width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            animation: detail-box 2s ease;
+            transition: all 0.5s ease-in-out;
+        }
+        .dt:hover{
+            transform: scale(1.1);
+            transition: all 0.5s ease-in-out;
+        }
+        @keyframes detail-box {
+            0%{
+                margin-left: -20%;
+                opacity: 0;
+            }
+        }
+        .name, .p{
+            color: white;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="right">
+            <div class="dpp">
+                <img src="photolab4.jpg" alt="dp" class="dp" width="220px" height="220px">
+                <div class="link ring1"></div>
+                <div class="link ring2"></div>
+                <div class="link ring3"></div>
+            </div>
+        </div>
+        <div class="left">
+            <div class="dt">
+                <h1 class="name">Tammy L Stonez</h1>
+                <p class="p">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis, accusantium facere? Perferendis, fugiat beatae id rem ipsam accusamus numquam magnam odit reprehenderit tempore dolor ipsum necessitatibus animi maiores illo natus.
+                </p>
+            </div>
+        </div>
+    </div>
+        <h1 class="pseudo">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus dolore minus distinctio, ipsa architecto officia eligendi eos adipisci quam ut sapiente debitis, aliquam inventore, doloremque deserunt laboriosam quaerat quos quae!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae accusamus porro labore, quisquam expedita illo nam saepe earum sed a nihil ut corporis, sunt iure laborum quis et obcaecati harum!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui atque fuga distinctio itaque cumque possimus repellendus quod perspiciatis, rem rerum iste inventore numquam necessitatibus unde ea obcaecati dolorum odio magnam.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis tenetur, ullam dolor quibusdam, officia accusantium ratione beatae nihil consectetur ab delectus et obcaecati hic quas minus eligendi soluta animi molestiae!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error in fugiat et, qui, adipisci quasi praesentium cumque quas facilis ad illum quaerat sapiente explicabo architecto maiores quia atque. Harum, asperiores?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti facilis, accusantium aperiam autem architecto quia impedit dolor eligendi ut voluptatibus quaerat quam, laboriosam nostrum modi adipisci perferendis! Ut, mollitia labore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat saepe laborum blanditiis! Laborum explicabo exercitationem, odit vel, et tempora nesciunt quo corporis, quidem alias odio beatae rerum. Ullam, sapiente modi.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique, eaque numquam. Neque accusamus deserunt ab eos ipsum necessitatibus culpa impedit ipsam, et qui officiis alias. Officiis minima magni nostrum labore?
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis cumque provident optio eveniet, omnis rem magnam dicta obcaecati ad deserunt ipsum quidem officia officiis error ipsam dignissimos culpa adipisci in!
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint corrupti facere dolorem natus laboriosam saepe magni? Corporis nisi unde fuga, labore excepturi quo ipsa illum quia consectetur impedit nobis debitis!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae culpa fugiat voluptatem itaque tempora illo beatae cupiditate rerum mollitia cumque placeat qui, illum repellendus molestias voluptas quos delectus quaerat? Amet?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam saepe illo consectetur iste? Error laudantium ea, voluptatem, a architecto esse aspernatur mollitia recusandae nesciunt optio ex eligendi voluptatibus voluptas odit!
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum, suscipit. Facere nesciunt at illum necessitatibus unde pariatur reiciendis, doloribus ea quisquam eos, aspernatur neque alias maxime consequuntur deleniti, beatae quidem?
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quas possimus voluptatem sit. Sint, molestias in quae expedita illo animi, eligendi obcaecati quidem minus vel distinctio officia voluptatem impedit veniam!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga dolor dicta eius adipisci expedita nihil debitis excepturi. Quibusdam maiores veritatis eius et nulla alias. Ex sapiente dolores beatae cumque perferendis.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quis officia praesentium cum odio iste dolor voluptates sunt beatae ullam assumenda tempore pariatur tempora placeat, ea omnis incidunt. Quibusdam, officiis?
+        </h1>
+</body>
+</html>
+
+
+
+
+
+
+<!-- For your services section -->
+<div class="service-card">
+  <i class="fas fa-paint-brush fa-3x"></i>   <!-- Graphics Design icon -->
+  <h3>Graphics Design</h3>
+  <p>Stunning logos, flyers, banners...</p>
+  <a href="#">Read More →</a>
+</div>
+
+<div class="service-card">
+  <i class="fas fa-scissors fa-3x"></i>      <!-- Tailoring icon -->
+  <h3>Tailoring</h3>
+  <p>Custom-made clothing crafted...</p>
+  <a href="#">Read More →</a>
+</div>
+
+<div class="service-card">
+  <i class="fas fa-code fa-3x"></i>          <!-- Web Development icon -->
+  <h3>Web Development</h3>
+  <p>Fast, responsive, and beautiful websites...</p>
+  <a href="#">Read More →</a>
+</div>
+
+<div class="service-card">
+  <i class="fas fa-video fa-3x"></i>         <!-- Video Editing icon -->
+  <h3>Video Editing</h3>
+  <p>Professional edits with smooth cuts...</p>
+  <a href="#">Read More →</a>
+</div>
+.icon-circle {
+  width: 100px;
+  height: 100px;
+  border: 3px solid #007bff;    /* your border colour */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #007bff;               /* icon colour same as border */
+  margin: 0 auto 20px;
+}
+
+.icon-circle {
+  width: 100px;           /* size of the circle */
+  height: 100px;          /* same as width */
+  background-color: #your-color;   /* e.g., #007bff or #ff6b00 */
+  border-radius: 50%;     /* make am perfect circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;           /* icon colour */
+  margin: 0 auto 20px;    /* center am and space below */
+  border: 4px solid #fff; /* optional white border around the circle */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* small shadow make am pop */
+}

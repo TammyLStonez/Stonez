@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livingstone's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- Font Awesome CDN -->
+</head>
+<body id="home">
+
+    <!-- Skip link -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Overlay -->
+    <div class="menu-overlay"></div>
+    
+    <!-- Navigation Bar -->
+    <nav class="site-nav">
+        <div class="container nav-inner">
+            <a href="/" class="nav-logo gradient-text">STONEZ</a>
+
+            <!-- Hamburger menu -->
+            <button class="menubar-toggle" aria-label="toggle-menubar" aria-label="Open Sidebar" aria-expanded="false" aria-controls="navbar">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <button class="chat-btn" aria-label="let's chat">
+                    Chat
+                    <i class="fa-chisel fa-regular fa-comment"></i>
+                </button>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Overlay -->
+    <div class="menu-overlay"></div>
+
+    <main id="main">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="pic-frame">
+                    <img src="photolab4.jpg" alt="Profile-Picture" class="profile-pic">
+                    <!-- Rings to rotate around the picture -->
+                    <div class="link ring1"></div>
+                    <div class="link ring2"></div>
+                </div>
+                <div class="intro_text">
+                    <h2>Hello, It's Me</h2>
+                    <h1>Tammy L Stonez</h1>
+                    <h2 class="cursor_text">I'm a
+                        <span class="text-show" style="--i:4;">Graphic Designer</span>
+                        <span class="text-show" style="--i:3;">Video Editor</span>
+                        <span class="text-show web-dev" style="--i:2;">FrontEnd Web Dev<span class="hide">eloper</span></span>
+                        <span class="text-show" style="--i:1;">Tailor</span>
+                    </h2>
+                    <p class="hero-intro">Please hold your breath as we dive into a world full of creativity with Tammy L Stonez.</p>
+                    <br>
+                    <div class="social-icons">
+                        <a href="www.google.com" class="facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="" class="telegram"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="" class="discord"><i class="fa-brands fa-discord"></i></a>
+                        <a href="" class="linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="" class="github"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                    <br>
+                    <button class="portfolio-btn btn" aria-label="portfolio-btn"><h3 class="btn-text">My Portfolio</h3></button>
+                </div>
+            </div>
+        </section>
+        <section id="about">
+            <div class="hero about"><!-- Giving it a class of hero so to have same styling -->
+                <div class="about-content">
+                    <div class="pic-frame about-pic">
+                        <img src="photolab4.jpg" alt="Profile-Picture" class="profile-pic">
+                        <div class="link ring1"></div>
+                        <div class="link ring2"></div>
+                        <div class="link ring3"></div>
+                        <div class="link ring4"></div>
+                    </div>
+                    <div class="about-text">
+                        <h1 class="about-header">About <span class="gradient-text">Me</span></h1>
+                        <br>
+                        <p class="about_paragraph">Hello, I am Livingstone, and my nickname is (Tammy L Stonez). I am a student of the Outliers Technical Training Services. I live in Nigeria, Rivers State. I am an 18 year old web developer, passionate about creating and learning. I am an ambitious and disciplined person. I am a Senior Level Front-end developer, Graphics designer, Video Editor, and very enthusiastic to new technologies. I dream to build a Tech Institution where all who dream about going into tech can have their dream come true.</p>
+                        <br>
+                        <a href="read-more"class="read-more"><button class="btn" aria-label="read-more"><h3>Read More</h3></button></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="services">
+            <div class="hero services">
+                <div class="services-inner">
+                    <a href="/services.html" class="service-header"><h3><span class="gradient-text">Services</span></h3></a>
+                    <div class="service-card-container">
+                        <div class="service-card1 cards">
+                            <i class="fas fa-paint-brush fa-3x"></i><!-- Graphics Design icon -->
+                            <h3>Graphic Design</h3>
+                            <p class="card-text">
+                                Eye-catching logos, flyers, banners and branding that make your business stand out and speak loud without saying a word.
+                            </p>
+                            <br>
+                            <button class="btn">See More</button>
+                        </div>
+                        <div class="service-card2 cards">
+                            <i class="fas fa-scissors fa-3x"></i><!-- Tailoring icon -->
+                            <h3 class="card-herder">Fashion Design</h3>
+                            <p class="card-text">
+                                Custom-made outfits crafted with precision and style – from traditional attires to modern fashion, I bring your dream look to life.</p>
+                            <br>
+                            <button class="btn">See More</button>
+                        </div>
+                        <div class="service-card3 cards">
+                            <i class="fas fa-code fa-3x"></i><!-- Web Development icon -->
+                            <h3 class="card-herder" >Web Development</h3>
+                            <p class="card-text">Fast, responsive and beautiful websites that work perfectly on phone, tablet and desktop. Your online presence, built right.</p>
+                            <br>
+                            <button class="btn">See More</button>
+                        </div>
+                        <div class="service-card4 cards">
+                            <i class="fas fa-video fa-3x"></i><!-- Video Editing icon -->
+                            <h3 class="card-herder" >Video Editing</h3>
+                            <p class="card-text">Professional cuts, smooth transitions, colour grading and sound design – turning raw footage into videos that people actually watch till the end.</p>
+                            <br>
+                            <button class="btn">See More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="portfolio">
+            <div class="hero portfolio">
+                <div class="portfolio-inner">
+                   <a href="/portfolio.html" class="portfolio-header"><h3><span class="gradient-text">Portfolio</span></h3></a>
+                </div>
+            </div>
+        </section>
+        <section id="contact">
+            <div class="hero contact">
+                <div class="contact-card">
+                    <h2 class="contact-header">Contact</h2>
+                    <br>
+                    <form name="contact" netlify action="/thank-you.html" method="POST">
+                        <input type="hidden" name="form-name" value="contact">
+                    
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="script.js" defer></script>
+</body>
+</html>

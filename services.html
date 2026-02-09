@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERVICES | Livingstone's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    Full “Read More” Pages
+Graphics Design
+I create visual identities that help businesses stand out. Services include logos, business cards, social media graphics, posters, banners, brochures, packaging design, and complete brand guidelines. Using industry-standard tools (Adobe Photoshop, Illustrator, and Figma), every design is original, modern, and tailored to your target audience. Whether you’re launching a new brand or refreshing an existing one, I deliver files in all required formats, ready for print and digital use.
+Tailoring
+Expert bespoke tailoring for men and women. I design and sew traditional Nigerian attire (Agbada, Senator wears, Isiagu, etc.), English suits, corporate outfits, bridal gowns, bridesmaid dresses, and casual fashion pieces. Every garment is made to your exact measurements using high-quality fabrics of your choice. From initial consultation and design sketches to final fitting, I ensure perfect fit and finish. I can recreate any style you admire or create an entirely new design just for you.
+Web Development
+I build clean, fast, and fully responsive websites that work perfectly on mobile, tablet, and desktop. Services include custom-coded sites (HTML, CSS, JavaScript, React), WordPress development, e-commerce stores (WooCommerce/Shopify), landing pages, portfolios, and company websites. All projects are SEO-optimized, secure, and come with an easy-to-use content management system so you can update your site yourself. Fast loading times and modern design guaranteed.
+Video Editing
+Professional video editing for all platforms and purposes: YouTube content, wedding films, music videos, commercials, corporate videos, documentaries, and social media reels (Instagram, TikTok, etc.). Services include cutting, colour grading, sound design, motion graphics, subtitles, transitions, and music synchronization using Adobe Premiere Pro, After Effects, and DaVinci Resolve. I turn raw footage into polished, engaging stories that capture attention and deliver your message effectively.
+Feel free to copy these directly or let me know if you want any section adjusted!
+</body>
+</html>
+
+
+
+
+/* General styling for the progress container (track) */
+progrss {
+  background-color: #f3f3f3; /* Fallback for unsupported browsers */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+  height: 20px;
+}
+
+/* For WebKit browsers (Chrome, Safari, Opera) */
+progrss::-webkit-progress-bar {
+  background-color: #f3f3f3;
+  border-radius: 5px;
+}
+
+/* For WebKit browsers: the actual filled-in portion */
+progrss::-webkit-progress-value {
+  background-color: #4caf50; /* Green color */
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}
+
+/* For Firefox */
+progrss::-moz-progress-bar {
+  background-color: #4caf50;
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}
+
+
+/* -- Div progress bar -- */
+.progress-container {
+  width: 10%;
+  background-color: #f3f3f3; /* Light gray track */
+  border-radius: 100px;
+  overflow: hidden; /* Keeps inner bar rounded at edges */
+  height: 10px;
+}
+
+.progress-bar {
+  width: 50%; /* This width needs to be updated dynamically */
+  height: 100%;
+  background-color: #04af2f; /* Green fill color */
+  text-align: right;
+  padding-right: 5px;
+  line-height: 10px; /* Center text vertically */
+  color: white;
+  box-sizing: border-box;
+  transition: width 0.4s ease; /* Smooth animation when width changes */
+}

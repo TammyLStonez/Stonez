@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn{
+            background-color: aliceblue;
+            width: 30px;
+            height: 5opx;
+            border: none;
+        }
+        .menu {
+            visibility: hidden;
+        }
+        .btn:hover{
+            background-color: blue;
+            width: 30px;
+        }
+        
+        button + .menu:active,
+        button:focus + .menu {
+            visibility: visible;
+        }
+
+        #menuToggle { display: none; }
+        .menu { display: none; }
+        #menuToggle:checked ~ .menu { display: block; }
+    </style>
+</head>
+<body>
+
+    <button class="btn">☰</button>
+    <nav class="meu">
+        <ul>
+            <li>
+            <button onclick="alert('Hello there!')">
+                Display Greeting
+            </button>
+            </li>
+            <li>
+            <button onclick="print()">
+                Print This Page
+            </button>
+            </li>
+        </ul>
+    </nav>
+
+    <input type="checkbox" id="menuToggle">
+    <label for="menuToggle">
+        <button>Menu</button>
+    </label>
+
+    <div class="menu">
+        <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+        </ul>
+    </div>
+</label>
+</body>
+</html>
