@@ -1,3 +1,2 @@
-#ignore all .txt and .html files
+#ignore all .txt files
 *.txt
-*.html

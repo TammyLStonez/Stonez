@@ -511,7 +511,7 @@ div.ring2{
 
 /* --About-- */
 .about{
-    min-height: 100vh;
+    padding-top: 82px;
 }
 .about-content{
     display: flex;
@@ -539,6 +539,8 @@ div.ring2{
 .services{
     min-height: 100vh;
     padding-top: 50px;
+    background: url(photolab4.jpg) no-repeat center center/cover;
+    background-attachment: fixed;
 }
 .services-inner{
     padding: 20px;
@@ -722,11 +724,35 @@ div.ring2{
 
 
 /* -- Contact -- */
-
+.contact{
+    background: url(photolab4.jpg) no-repeat center center/cover;
+    background-attachment: fixed;
+}
+.contact-inner{
+    width: max-content;
+    margin: 100px auto;
+}
+.contact-card{
+    background: linear-gradient(180deg,  50%, rgba(0, 0, 0, 0) 100%);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    padding: 2rem;
+    border-radius: var(--radius);
+    text-align: center;
+    align-items: center;
+}
+.contact-card form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 /* -- Responsiveness -- */
 @media (max-width: 880px) {
     body{
         padding-top: 60px;
+    }
+    .site-nav{
+        height: 60px;
     }
     .container .nav-menu{
         display: flex;
@@ -762,6 +788,9 @@ div.ring2{
     }
     .menubar-toggle.active .bar:nth-child(3){
         transform: translateY(-8px) rotate(-45deg);
+    }
+    .chat-btn{
+        display: none;
     }
     .hero{
         padding-top: 60px;
