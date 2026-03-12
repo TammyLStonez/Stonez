@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0e0e0e"><!-- Theme color for PWA -->
     <meta name="background-color" content="#0e0e0e"><!-- Background color for PWA -->
-    <link rel="icon" type="image/x-icon" href="stonezfavicon.ico" class="x-icon"><!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="stonezfavicon.ico" style="border-radius: 50%;"><!-- Favicon -->
     <title>Livingstone's Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- Font Awesome CDN -->
@@ -18,7 +18,22 @@
 
     <!-- Overlay -->
     <div class="menu-overlay"></div>
-    
+
+    <!-- Floating Chat button -->
+    <button class="floating-chat-btn" aria-label="let's chat" onclick=openPopup() id="open-popup-btn">
+        <span class="chat">Chat</span>
+        <i class="fa-chisel fa-regular fa-comment"></i>
+    </button>
+
+    <dialog id="popUp-modal">
+        <h2 class="popup-header">This Link will take you to WhatsApp</h2>
+        <img src="photolab4.jpg" alt="WhatsApp Profile Card" class="WhatsApp-profile-card">
+        <div class="popup-action-btns">
+            <button><a href="http://wa.me/2349155101626" class="chat-btn">Continue</a></button>
+            <button onclick="closePopup()" class="btn">Close</button>
+        </div>
+    </dialog>
+
     <!-- Navigation Bar -->
     <nav class="site-nav">
         <div class="container nav-inner">
@@ -36,8 +51,8 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <button class="chat-btn" aria-label="let's chat">
-                    Chat
+                <button class="chat-btn" aria-label="let's chat" onclick="openPopup()" id="popup-btn">
+                    <span class="chat">Chat</span>
                     <i class="fa-chisel fa-regular fa-comment"></i>
                 </button>
             </ul>
@@ -151,15 +166,19 @@
                 <div class="contact-inner">
                     <div class="contact-card">
                         <h2 class="gradient-text contact-header">Contact</h2>
-                        <br>
-                        <form name="contact" netlify action="/thank-you.html" method="POST">
-                            <input type="hidden" name="form-name" value="contact">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                            <input type="email" name="email" placeholder="Your Email" required>
-                            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                        <div class="input-box">
+                            <label for="name">First Name</label>
+                            <input type="text" name="name" id="name" placeholder="Full Name">
+                        </div>
 
-                            <button type="submit" class="btn">Send Message</button>
-                        </form>
+                        <div>
+                            <label for="password">Send us a Message</label>
+                            <input type="password" name="password" id="password" placeholder="Password">'
+                        </div>
+
+                        <div>
+                            <input type="button" value="Send Message" id="btn">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -167,6 +186,6 @@
     </main>
 
     <!-- JavaScript -->
-    <script src="script.js" defer></script>
+    <script src="script.js"></script>
 </body>
 </html>

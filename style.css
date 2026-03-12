@@ -54,6 +54,22 @@ body{
     border-radius: 4px;
 }
 
+.floating-chat-btn{
+    display: none;
+    z-index: 99999;
+    text-decoration: none;
+    color: var(--bg);
+    padding: 2em 2em;
+    background: var(--text-gradient);
+    border-radius: 150vw 0 0 150vw;
+    border: none;
+    transition: 0.18s;
+    display: none;
+    cursor: pointer;
+    position: fixed;
+    right: 0px;
+    top: 80%;
+}
 /*-- Navbar styling --*/
 .site-nav{
     position: fixed;
@@ -110,7 +126,7 @@ body{
     backdrop-filter: blur(2px);
     position: fixed;
     inset: 0;
-    z-index: 990;
+    z-index: 1000;
     opacity: 0;
     pointer-events: none;
     transition: all .18s ease-in-out;
@@ -189,6 +205,7 @@ body{
     border: none;
     transition: 0.18s;
     display: flex;
+    gap: 2px;
     position: relative;
     justify-content: center;
     align-items: center;
@@ -729,7 +746,7 @@ div.ring2{
     background-attachment: fixed;
 }
 .contact-inner{
-    width: max-content;
+    width: 100%;
     margin: 100px auto;
 }
 .contact-card{
@@ -740,6 +757,8 @@ div.ring2{
     border-radius: var(--radius);
     text-align: center;
     align-items: center;
+    min-width: 80vw;
+    margin: auto;
 }
 .contact-card form{
     display: flex;
@@ -792,10 +811,80 @@ div.ring2{
     .chat-btn{
         display: none;
     }
+    .chat{
+        display: none;
+    }
+    .fa-comment{
+        transform: scale(2);
+    }
+    .floating-chat-btn{
+        display: flex;
+    }
+    .floating-chat-btn:hover{
+        color: var(--white);
+        background: var(--bg);
+        box-shadow: -5px -3px 15px #00ffff, 5px 3px 15px #8a2be2;
+    }
     .hero{
         padding-top: 60px;
     }
     .cursor_text .text-show .hide{
         display: none;
+    }
+}
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg: #fff;
+        --muted: #0e0e0e;
+    }
+}
+
+/* -- Popup Modal box -- */
+#popUp-modal{
+    background-color: var(--bg);
+    display: none;
+    position: fixed;
+    flex-direction: column;
+    text-align: center;
+    justify-self: center;
+    align-items: center;
+    gap: 20px;
+    width: fit-content;
+    max-width: 400px;
+    max-height: fit-content;
+    padding: 1.5rem;
+    border-radius: 20px;
+    z-index: 999;
+    border: none;
+    box-shadow: 0 10px 20px rgba(80, 80, 80, 0.5);
+    opacity: 0;
+    transition: all 18s;
+}
+#popUp-modal.show{
+    display: flex;
+    opacity: 1;
+    transition: all 18s;
+
+    .popup-header{
+        font-size: clamp(1rem, 3vw, 2rem);
+        color: var(--accent);
+    }
+    .WhatsApp-profile-card{
+        position: relative;
+        width: clamp(100px, 80vw, 250px);
+        height: clamp(100px, 80vw, 250px);
+        border-radius: 2vw 2vw 0 0;
+    }
+    .popup-action-btns{
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-transform: lowercase;
+    }
+    .chat-btn{
+        display: flex;
+        text-transform: capitalize;
+        border: none;
     }
 }

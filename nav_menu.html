@@ -133,6 +133,7 @@
             }
         }
     </style>
+    <script src="aiscript.js" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -153,7 +154,20 @@
         </div>
     </nav>
     <main>
+        <div id="chat-container">
+            <div id="chat-window"></div>
+            <input type="text" id="user-input" placeholder="Ask me about my work...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
 
     </main>
+    
+    <script type="importmap">
+        {
+            "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+            }
+        }
+    </script>
 </body>
 </html>

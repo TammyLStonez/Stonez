@@ -61,5 +61,17 @@ navLinks.forEach(link => {
 // 5. Handle window resizing
 media.addEventListener('change', updateInertState);
 
+const popUp = document.getElementById('popUp-modal')
+
+//6. Open chat pop-up when chat button is clicked
+function openPopup(){
+  popUp.classList.add('show')
+  //overlay.classList.add('active');
+  //document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+function closePopup(){
+  popUp.classList.remove('show')
+}
+
 // Initial check on page load
 window.addEventListener('DOMContentLoaded', updateInertState);
