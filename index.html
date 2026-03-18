@@ -117,7 +117,7 @@
         <section id="services">
             <div class="hero services">
                 <div class="services-inner">
-                    <a href="/services.html" class="service-header"><h3><span class="gradient-text">Services</span></h3></a>
+                    <h3 class="gradient-text service-header">Services</h3>
                     <div class="service-card-container">
                         <div class="service-card1 cards">
                             <i class="fas fa-paint-brush fa-3x"></i><!-- Graphics Design icon -->
@@ -157,29 +157,94 @@
         <section id="portfolio">
             <div class="hero portfolio">
                 <div class="portfolio-inner">
-                   <a href="/portfolio.html" class="portfolio-header"><h3><span class="gradient-text">Portfolio</span></h3></a>
+                    <h3 class="gradient-text portfolio-header">Portfolio</h3>
                 </div>
             </div>
         </section>
         <section id="contact">
             <div class="hero contact">
                 <div class="contact-inner">
-                    <div class="contact-card">
-                        <h2 class="gradient-text contact-header">Contact</h2>
-                        <div class="input-box">
-                            <label for="name">First Name</label>
-                            <input type="text" name="name" id="name" placeholder="Full Name">
+                    <h2 class="contact-header gradient-text">Contact</h2>
+                    <div class="cf-card">
+                        <h2 class="cf-title">Let's work <span class="gradient-text">together</span></h2>
+                        <p class="cf-sub">Have a project in mind? Fill out the form and I'll get back to you within 24 hours.</p>
+
+                        <!-- Horizontal rule -->
+                        <hr class="cf-divider">
+
+                        <!-- cf (CF as in Contact Form) -->
+                        <div class="cf-fields" id="cfform">
+                            <div class="cf-row">
+                                <div class="cf-group">
+                                    <label class="cf-label" for="cf-name">Full name</label>
+                                    <input class="cf-input" id="cf-name" type="text" placeholder="Jane Smith" autocomplete="name" />
+                                    <span class="cf-error" id="err-name">Please enter your name.</span>
+                                </div>
+                                <div class="cf-group">
+                                    <label class="cf-label" for="cf-email">Email address</label>
+                                    <input class="cf-input" id="cf-email" type="email" placeholder="jane@example.com" autocomplete="email" />
+                                    <span class="cf-error" id="err-email">Enter a valid email address.</span>
+                                </div>
+                            </div>
+                            <div class="cf-group">
+                                <label class="cf-label" for="cf-subject">
+                                Subject <span class="optional">(optional)</span>
+                                </label>
+                                <input class="cf-input" id="cf-subject" type="text" placeholder="Project inquiry, collaboration…" />
+                            </div>
+                        
+                            <div class="cf-group">
+                                <label class="cf-label" for="cf-msg">Message</label>
+                                <textarea class="cf-textarea" id="cf-msg" maxlength="1000"
+                                placeholder="Tell me about your project, timeline, and budget…"></textarea>
+                                <div class="cf-meta">
+                                    <span class="cf-error" id="err-msg">Please write a message (min. 20 characters).</span>
+                                    <span class="cf-char" id="cf-char">0 / 1000</span>
+                                </div>
+                            </div>
+                        
+                            <div class="cf-footer">
+                                <span class="cf-note">I typically reply within 1 business day.</span>
+                                <button class="cf-btn" id="cf-submit" onclick="submitForm()">
+                                Send message
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <path d="M2 7h10M8 3l4 4-4 4" stroke="#000" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                </button>
+                            </div>
+                        </div><!-- End of cf-fields -->
+
+                        <!-- Success banner -->
+                        <div class="cf-success" id="cf-success">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <circle cx="9" cy="9" r="8.5" stroke="currentColor"/>
+                                <path d="M5 9l3 3 5-5" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Message sent! Opening WhatsApp to deliver it to me…
                         </div>
 
-                        <div>
-                            <label for="password">Send us a Message</label>
-                            <input type="password" name="password" id="password" placeholder="Password">'
-                        </div>
-
-                        <div>
-                            <input type="button" value="Send Message" id="btn">
-                        </div>
-                    </div>
+                        <!-- WhatsApp note -->
+                        <p class="cf-wa-note">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#25d366">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15
+                                -.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475
+                                -.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52
+                                .149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207
+                                -.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372
+                                -.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2
+                                5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085
+                                1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.859L.057 23.428
+                                a.75.75 0 00.916.916l5.569-1.475A11.943 11.943 0 0012 24c6.627 0 12-5.373
+                                12-12S18.627 0 12 0zm0 22c-1.907 0-3.699-.5-5.254-1.375l-.376-.215-3.898 1.032
+                                1.032-3.898-.215-.376A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477
+                                10 10-4.477 10-10 10z"/>
+                            </svg>
+                            Message will be sent via WhatsApp
+                        </p>
+                    </div><!-- End of cf-card -->
                 </div>
             </div>
         </section>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--OCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,60 +17,417 @@ Web Development
 I build clean, fast, and fully responsive websites that work perfectly on mobile, tablet, and desktop. Services include custom-coded sites (HTML, CSS, JavaScript, React), WordPress development, e-commerce stores (WooCommerce/Shopify), landing pages, portfolios, and company websites. All projects are SEO-optimized, secure, and come with an easy-to-use content management system so you can update your site yourself. Fast loading times and modern design guaranteed.
 Video Editing
 Professional video editing for all platforms and purposes: YouTube content, wedding films, music videos, commercials, corporate videos, documentaries, and social media reels (Instagram, TikTok, etc.). Services include cutting, colour grading, sound design, motion graphics, subtitles, transitions, and music synchronization using Adobe Premiere Pro, After Effects, and DaVinci Resolve. I turn raw footage into polished, engaging stories that capture attention and deliver your message effectively.
-Feel free to copy these directly or let me know if you want any section adjusted!
+Feel free to copy these directly or let me know if you want any section adjusted! -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* ── Reset ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f5f4f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+ 
+    /* ── Card wrapper ───────────────────────────────────── */
+    .cf-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 560px;
+    }
+ 
+    /* ── Header ─────────────────────────────────────────── */
+    .cf-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #888780;
+      margin-bottom: 8px;
+    }
+ 
+    .cf-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a18;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+ 
+    .cf-sub {
+      font-size: 14px;
+      color: #5f5e5a;
+      margin-bottom: 0;
+    }
+ 
+    .cf-divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      margin: 1.5rem 0;
+    }
+ 
+    /* ── Form fields ────────────────────────────────────── */
+    .cf-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+ 
+    .cf-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+ 
+    @media (max-width: 480px) {
+      .cf-row { grid-template-columns: 1fr; }
+      .cf-card { padding: 2rem 1.25rem; }
+      .cf-title { font-size: 24px; }
+    }
+ 
+    .cf-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+ 
+    .cf-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #5f5e5a;
+    }
+ 
+    .cf-label .optional {
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+      color: #888780;
+    }
+ 
+    .cf-input,
+    .cf-textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      padding: 11px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.15);
+      background: #ffffff;
+      color: #1a1a18;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      width: 100%;
+    }
+ 
+    .cf-input::placeholder,
+    .cf-textarea::placeholder {
+      color: #b4b2a9;
+    }
+ 
+    .cf-input:hover,
+    .cf-textarea:hover {
+      border-color: rgba(0,0,0,0.25);
+    }
+ 
+    .cf-input:focus,
+    .cf-textarea:focus {
+      border-color: #7f77dd;
+      box-shadow: 0 0 0 3px rgba(127,119,221,0.15);
+    }
+ 
+    .cf-input.error,
+    .cf-textarea.error {
+      border-color: #e24b4a;
+      box-shadow: 0 0 0 3px rgba(226,75,74,0.12);
+    }
+ 
+    .cf-textarea {
+      resize: vertical;
+      min-height: 130px;
+      line-height: 1.6;
+    }
+ 
+    /* ── Error + char counter ───────────────────────────── */
+    .cf-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 16px;
+    }
+ 
+    .cf-error {
+      font-size: 12px;
+      color: #e24b4a;
+      display: none;
+    }
+ 
+    .cf-error.show { display: block; }
+ 
+    .cf-char {
+      font-size: 12px;
+      color: #b4b2a9;
+      margin-left: auto;
+    }
+ 
+    /* ── Footer / submit ────────────────────────────────── */
+    .cf-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+ 
+    .cf-note {
+      font-size: 12px;
+      color: #888780;
+    }
+ 
+    .cf-btn {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      background: #534ab7;
+      color: #ffffff;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+ 
+    .cf-btn:hover  { background: #7f77dd; }
+    .cf-btn:active { transform: scale(0.98); }
+ 
+    .cf-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+ 
+    /* ── Success banner ─────────────────────────────────── */
+    .cf-success {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 18px;
+      border-radius: 8px;
+      background: #eaf3de;
+      border: 1px solid #97c459;
+      color: #3b6d11;
+      font-size: 14px;
+      align-items: center;
+      gap: 10px;
+    }
+ 
+    .cf-success.show { display: flex; }
+ 
+    /* ── WhatsApp note ──────────────────────────────────── */
+    .cf-wa-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #888780;
+      text-align: center;
+    }
+ 
+    .cf-wa-note svg {
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cf-card">
+ 
+    <!-- Header -->
+    <p class="cf-eyebrow">Contact</p>
+    <h2 class="cf-title">Let's work together</h2>
+    <p class="cf-sub">Have a project in mind? Fill out the form and I'll get back to you within 24 hours.</p>
+ 
+    <hr class="cf-divider" />
+ 
+    <!-- Form -->
+    <div class="cf-fields" id="cfForm">
+ 
+      <div class="cf-row">
+        <div class="cf-group">
+          <label class="cf-label" for="cf-name">Full name</label>
+          <input class="cf-input" id="cf-name" type="text" placeholder="Jane Smith" autocomplete="name" />
+          <span class="cf-error" id="err-name">Please enter your name.</span>
+        </div>
+        <div class="cf-group">
+          <label class="cf-label" for="cf-email">Email address</label>
+          <input class="cf-input" id="cf-email" type="email" placeholder="jane@example.com" autocomplete="email" />
+          <span class="cf-error" id="err-email">Enter a valid email address.</span>
+        </div>
+      </div>
+ 
+      <div class="cf-group">
+        <label class="cf-label" for="cf-subject">
+          Subject <span class="optional">(optional)</span>
+        </label>
+        <input class="cf-input" id="cf-subject" type="text" placeholder="Project inquiry, collaboration…" />
+      </div>
+ 
+      <div class="cf-group">
+        <label class="cf-label" for="cf-msg">Message</label>
+        <textarea class="cf-textarea" id="cf-msg" maxlength="1000"
+          placeholder="Tell me about your project, timeline, and budget…"></textarea>
+        <div class="cf-meta">
+          <span class="cf-error" id="err-msg">Please write a message (min. 20 characters).</span>
+          <span class="cf-char" id="cf-char">0 / 1000</span>
+        </div>
+      </div>
+ 
+      <div class="cf-footer">
+        <span class="cf-note">I typically reply within 1 business day.</span>
+        <button class="cf-btn" id="cf-submit" onclick="submitForm()">
+          Send message
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+ 
+    </div><!-- /cf-fields -->
+ 
+    <!-- Success banner -->
+    <div class="cf-success" id="cf-success">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <circle cx="9" cy="9" r="8.5" stroke="currentColor"/>
+        <path d="M5 9l3 3 5-5" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Message sent! Opening WhatsApp to deliver it to me…
+    </div>
+ 
+    <!-- WhatsApp note -->
+    <p class="cf-wa-note">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#25d366">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15
+          -.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475
+          -.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52
+          .149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207
+          -.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372
+          -.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2
+          5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085
+          1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.859L.057 23.428
+          a.75.75 0 00.916.916l5.569-1.475A11.943 11.943 0 0012 24c6.627 0 12-5.373
+          12-12S18.627 0 12 0zm0 22c-1.907 0-3.699-.5-5.254-1.375l-.376-.215-3.898 1.032
+          1.032-3.898-.215-.376A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477
+          10 10-4.477 10-10 10z"/>
+      </svg>
+      Message will be sent via WhatsApp
+    </p>
+ 
+  </div><!-- /cf-card -->
+ 
+  <script>
+    /* ── Character counter ────────────────────────────── */
+    const msgEl  = document.getElementById('cf-msg');
+    const charEl = document.getElementById('cf-char');
+    msgEl.addEventListener('input', () => {
+      charEl.textContent = msgEl.value.length + ' / 1000';
+    });
+ 
+    /* ── Validation ───────────────────────────────────── */
+    function validate() {
+      let ok = true;
+      const nameEl  = document.getElementById('cf-name');
+      const emailEl = document.getElementById('cf-email');
+ 
+      // clear previous state
+      [nameEl, emailEl, msgEl].forEach(el => el.classList.remove('error'));
+      ['err-name','err-email','err-msg'].forEach(id =>
+        document.getElementById(id).classList.remove('show')
+      );
+ 
+      if (!nameEl.value.trim()) {
+        nameEl.classList.add('error');
+        document.getElementById('err-name').classList.add('show');
+        ok = false;
+      }
+ 
+      const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRx.test(emailEl.value.trim())) {
+        emailEl.classList.add('error');
+        document.getElementById('err-email').classList.add('show');
+        ok = false;
+      }
+ 
+      if (msgEl.value.trim().length < 20) {
+        msgEl.classList.add('error');
+        document.getElementById('err-msg').classList.add('show');
+        ok = false;
+      }
+ 
+      return ok;
+    }
+ 
+    /* ── Submit → WhatsApp ────────────────────────────── */
+    function submitForm() {
+      if (!validate()) return;
+ 
+      const btn = document.getElementById('cf-submit');
+      btn.disabled = true;
+      btn.textContent = 'Opening WhatsApp…';
+ 
+      /* ── ✏️  REPLACE with your number (digits only, no + or spaces)
+              Example:  '447911123456'  for a UK +44 number
+                        '2348012345678' for a Nigerian +234 number  ── */
+      const PHONE = '2349155101626';
+ 
+      const name    = document.getElementById('cf-name').value.trim();
+      const email   = document.getElementById('cf-email').value.trim();
+      const subject = document.getElementById('cf-subject').value.trim();
+      const message = msgEl.value.trim();
+ 
+      const text = [
+        '👋 New message from your portfolio!',
+        '',
+        `🧑 Name:    ${name}`,
+        `📧 Email:   ${email}`,
+        subject ? `📌 Subject: ${subject}` : null,
+        '',
+        `💬 Message:\n${message}`,
+      ].filter(line => line !== null).join('\n');
+ 
+      const waURL = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
+ 
+      /* Show success banner, then open WhatsApp */
+      const form = document.getElementById('cfForm');
+      form.style.opacity        = '0.4';
+      form.style.pointerEvents  = 'none';
+      document.getElementById('cf-success').classList.add('show');
+ 
+      setTimeout(() => window.open(waURL, '_blank'), 800);
+    }
+  </script>
 </body>
 </html>
-
-
-
-
-/* General styling for the progress container (track) */
-progrss {
-  background-color: #f3f3f3; /* Fallback for unsupported browsers */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 300px;
-  height: 20px;
-}
-
-/* For WebKit browsers (Chrome, Safari, Opera) */
-progrss::-webkit-progress-bar {
-  background-color: #f3f3f3;
-  border-radius: 5px;
-}
-
-/* For WebKit browsers: the actual filled-in portion */
-progrss::-webkit-progress-value {
-  background-color: #4caf50; /* Green color */
-  border-radius: 5px;
-  transition: width 0.4s ease;
-}
-
-/* For Firefox */
-progrss::-moz-progress-bar {
-  background-color: #4caf50;
-  border-radius: 5px;
-  transition: width 0.4s ease;
-}
-
-
-/* -- Div progress bar -- */
-.progress-container {
-  width: 10%;
-  background-color: #f3f3f3; /* Light gray track */
-  border-radius: 100px;
-  overflow: hidden; /* Keeps inner bar rounded at edges */
-  height: 10px;
-}
-
-.progress-bar {
-  width: 50%; /* This width needs to be updated dynamically */
-  height: 100%;
-  background-color: #04af2f; /* Green fill color */
-  text-align: right;
-  padding-right: 5px;
-  line-height: 10px; /* Center text vertically */
-  color: white;
-  box-sizing: border-box;
-  transition: width 0.4s ease; /* Smooth animation when width changes */
-}

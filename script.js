@@ -73,5 +73,90 @@ function closePopup(){
   popUp.classList.remove('show')
 }
 
+
+/* --   OVERALL CONTACT SECTION BEHAVIOR -- */
+
+/* ── Character counter ───────── */
+const msgEl  = document.getElementById('cf-msg');
+const charEl = document.getElementById('cf-char');
+msgEl.addEventListener('input', () => {
+  charEl.textContent = msgEl.value.length + ' / 1000';
+});
+
+/* ── Validation ────────── */
+function validate() {
+  let ok = true;
+  const nameEl  = document.getElementById('cf-name');
+  const emailEl = document.getElementById('cf-email');
+
+  // clear previous state
+  [nameEl, emailEl, msgEl].forEach(el => el.classList.remove('error'));
+  ['err-name','err-email','err-msg'].forEach(id =>
+    document.getElementById(id).classList.remove('show')
+  );
+
+  if (!nameEl.value.trim()) {
+    nameEl.classList.add('error');
+    document.getElementById('err-name').classList.add('show');
+    ok = false;
+  }
+
+  const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRx.test(emailEl.value.trim())) {
+    emailEl.classList.add('error');
+    document.getElementById('err-email').classList.add('show');
+    ok = false;
+  }
+
+  if (msgEl.value.trim().length < 20) {
+    msgEl.classList.add('error');
+    document.getElementById('err-msg').classList.add('show');
+    ok = false;
+  }
+
+  return ok;
+}
+
+/* ── Submit → WhatsApp ────────────────────────────── */
+function submitForm() {
+  if (!validate()) return;
+
+  const btn = document.getElementById('cf-submit');
+  btn.disabled = true;
+  btn.textContent = 'Opening WhatsApp…';
+
+  /* ── ✏️  REPLACE with your number (digits only, no + or spaces)
+          Example:  '447911123456'  for a UK +44 number
+                    '2348012345678' for a Nigerian +234 number  ── */
+  const PHONE = '2349155101626';
+
+  const name    = document.getElementById('cf-name').value.trim();
+  const email   = document.getElementById('cf-email').value.trim();
+  const subject = document.getElementById('cf-subject').value.trim();
+  const message = msgEl.value.trim();
+
+  const text = [
+    '👋 New message from your portfolio!',
+    '',
+    `🧑 Name:    ${name}`,
+    `📧 Email:   ${email}`,
+    subject ? `📌 Subject: ${subject}` : null,
+    '',
+    `💬 Message:\n${message}`,
+  ].filter(line => line !== null).join('\n');
+
+  const waURL = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
+
+  /* Show success banner, then open WhatsApp */
+  const form = document.getElementById('cfForm');
+  form.style.opacity        = '0.4';
+  form.style.pointerEvents  = 'none';
+  document.getElementById('cf-success').classList.add('show');
+
+  setTimeout(() => window.open(waURL, '_blank'), 800);
+}
+
+/* -- END OF OVERALL CONTACT SECTION BEHAVIOUR -- */
+
 // Initial check on page load
 window.addEventListener('DOMContentLoaded', updateInertState);
