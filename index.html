@@ -8,8 +8,1286 @@
     <link rel="icon" type="image/x-icon" href="stonezfavicon.ico"><!-- Favicon -->
     <title>Livingstone's Portfolio</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- Font Awesome 6.5.2 CDN -->
     <link rel="manifest" href="/site.webmanifest"><!-- Web Manifest for PWA -->
+
+    <!-- Stylesheet -->
+    <style>
+        /* ---- Reset & variables ---- */
+        /* FIXED CSS RESET */
+        :root {
+            --bg: #0e0e0e;
+            --panel: #000000;
+            --muted: #bdbdbd;
+            --muted-2: #8b8b8b;
+            --white: #ffffff;
+            --accent: #e6e6e6;
+            --radius: 30px;
+            --container-padding: 0 2rem;
+            --max-width: 1600px;
+            --text-gradient: linear-gradient(135deg, #00ffff 0%,  #8a2be2 100%);
+        }
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ---- Base ---- */
+        html,body { height: 100%; scroll-behavior: smooth;}
+        body{
+            font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: var(--bg);
+            color: var(--muted);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
+            padding-top: 82px; /* space for fixed nav */
+            overflow-y: auto;
+            overflow-x: hidden;
+            max-width: 100%;
+            position: relative;
+        }
+        .skip-link{
+            position: absolute;
+            left: -9999px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        .skip-link:focus{
+            left: 10px;
+            top: 10px;
+            width: auto;
+            height: auto;
+            padding: 8px 12px;
+            background: var(--text-gradient);
+            color: #000;
+            font-weight: 600;
+            z-index: 10000;
+            border-radius: 4px;
+        }
+
+        .floating-chat-btn{
+            display: none;
+            z-index: 99999;
+            text-decoration: none;
+            color: var(--bg);
+            padding: 2em 2em;
+            background: var(--text-gradient);
+            border-radius: 150vw 0 0 150vw;
+            border: none;
+            transition: 0.18s;
+            display: none;
+            cursor: pointer;
+            position: fixed;
+            right: 0px;
+            top: 80%;
+        }
+
+        /*-- Navbar styling --*/
+        .site-nav{
+            position: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 80px;
+            top: 0;
+            background: linear-gradient(180deg,  50%, rgba(0, 0, 0, 0) 100%);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            animation: dropin .7s ease;
+        }
+        @keyframes dropin {
+            0%{
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            100%{
+                transform: translateY(0px);
+                opacity: 1;
+            }
+        }
+
+        /* -- A simple container inside the navbar -- */
+        .container{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: var(--max-width);
+            padding: 0 2rem;
+        }
+
+        /* -- Navbar Logo-- */
+        .nav-logo{
+            font-weight: 800;
+            font-size: clamp(1.2rem, 5vw, 1.5rem);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* -- Menu Buttton -- */
+        .menubar-toggle{
+            display: none;
+            background: transparent;
+            padding: 0px;
+            border: none;
+            cursor: pointer;
+        }
+        .menubar-toggle .bar{
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            border-radius: var(--radius);
+            background: var(--text-gradient);
+            transition: all 0.5s ease-in-out;
+        }
+        /* -- Overlay for menu-bar -- */
+        .menu-overlay{
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(2px);
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all .18s ease-in-out;
+        }
+        .menu-overlay.active{
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* --Nav Links-- */
+        .nav-menu{
+            list-style: none;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            gap: 1rem;
+        }
+        .nav-menu li a{
+            text-decoration: none;
+            font-size: 0.7rem;
+            padding: 2px 20px;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 700;
+            letter-spacing: 1.6px;
+            transition: all .18s ease;
+            position: relative;/*Important for ::before pseudo element positioning. Others are as follows...*/
+            justify-content: center;
+            text-align: center;
+            display: flex;
+        }
+        .nav-menu a:hover, .nav-menu a:focus{
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;/* Target webkit specifically */
+            background-clip: text; /* Add gradient on hover */
+            transform: translateY(-1px);
+        }
+
+        /* --- Styling for bottom border animation ---*/
+        .nav-menu a::before{
+            content: "";
+            position: absolute;
+            background-image: var(--text-gradient);
+            width: 0;
+            height: 3px;
+            top: 20px;
+            border-radius: 1000px;
+            transition: .18s;
+            opacity: 0;
+        }
+        .nav-menu a:hover::before{
+            width: calc(55% + 8px);
+            opacity: 1;
+        }
+        .nav-menu a:focus::before{
+            width: 70%;
+            opacity: 1;
+        }
+        .nav-menu a:active::before{
+            width: 50%;
+            opacity: 1;
+        }
+
+        /* --Let's Chat-- */
+        .chat-btn{
+            text-decoration: none;
+            text-transform: uppercase;
+            color: var(--bg);
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 1.6px;
+            padding: 1em 2em;
+            background: var(--text-gradient);
+            border-radius: 30px;
+            border: none;
+            transition: 0.18s;
+            display: flex;
+            gap: 2px;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .chat-btn:hover{
+            color: var(--white);
+            background: var(--bg);
+            box-shadow: -5px -3px 15px #00ffff, 5px 3px 15px #8a2be2;
+        }
+
+        /*
+        .chat-btn.active::after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 30px;
+            background-color: rgba(59, 59, 59, 0.461);
+            clip-path: circle(0% at 50% 50%);
+            transition: 0.18s;
+            z-index: 1;
+        }
+        .chat-btn.active:focus::after{
+            clip-path: circle(100% at 50% 50%);
+        }
+        */
+
+        /* ---HERO SECTION--- */
+        /* Hero sections should be positioned below nav */
+        .hero{
+            min-height: 100vh;
+            padding: 0 30px;
+            padding-top: 40px;
+            padding-bottom: 20px;
+            margin-top: 0;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: var(--panel) 4px solid;
+        }
+        .hero-content{
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row-reverse;
+            align-items: center;
+            max-width: var(--max-width);
+            justify-content: space-evenly;
+            gap: 30px;
+        }
+
+        /* --A simple container that contains the picture and the links orbiting around the picture*/
+        .pic-frame{
+            position: relative;
+            height: clamp(200px, 30vw, 300px);
+            width: clamp(200px, 30vw, 300px);
+            justify-content: center;
+            text-align: center;
+            display: flex;
+            animation: bounce 3s linear infinite;
+            transition: all .18s ease;
+            animation: slidein-right 1s ease;
+        }
+        @keyframes bounce{
+            0%{
+                transform: translateY(0);
+            }
+            50%{
+                transform: translateY(10px);
+            }
+            100%{
+                transform: translateY(0);
+            }
+        }
+        .profile-pic{
+            width: clamp(200px, 30vw, 300px);
+            height: clamp(200px, 30vw, 300px);
+            position: absolute;
+            padding: 20px;
+            border-radius: 40%;
+            z-index: 100;
+        }
+        div.link{
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            border-radius: 40%;
+            animation: link-rotate 5s linear infinite;
+            transition: all 0.18s ease;
+            z-index: 1;
+        }
+        div.ring1{
+            border: 3px solid #00ffff;
+            box-shadow: 0 0 10px #55ffff;
+            animation-delay: 1ms;
+        }
+        div.ring2{
+            border: 3px solid #8a2be2;
+            box-shadow: 0 0 10px #a84cff;
+            animation-delay: 3ms;
+            animation-direction: reverse;
+        }
+        @keyframes link-rotate {
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+
+        .intro_text{
+            width: 600px;
+            animation: slidein-left 1s ease;
+            transition: all 0.5s ease-in-out;
+        }
+        @keyframes slidein-right {
+            0%{
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            100%{
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes slidein-left {
+            0%{
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100%{
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+        @keyframes slidein-bottom {
+            0%{
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100%{
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+        .intro_text h2{
+            font-size: clamp(0.8rem, 7vw, 2rem);
+        }
+        .intro_text h1{
+            font-size: clamp(1rem, 7vw, 2rem);
+        }
+        .text-show, .gradient-text{
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .cursor_text{
+            font-size: clamp(1rem, 6vw, 2rem);
+            display: flex;
+            flex-direction: column;
+        }
+        .cursor_text .text-show{
+            display: inline-block;
+            position: relative;
+            justify-content: center;
+            text-align: center;
+            display: flex;
+            width: fit-content;
+            animation: display-text 8s linear infinite;
+            animation-delay: calc(-2s * var(--i));
+        }
+        .cursor_text .text-show::before{
+            content: '';
+            position: absolute;
+            width: calc(100% + 5px);
+            height: 0%;
+            align-self: center;
+            border-right: 2px solid #0e0e0e;
+            animation: cursor 1s infinite;
+        }
+        .cursor_text .web-dev{
+            display: block;
+        }
+        .cursor_text .hide{
+            display: inline-block;
+        }
+        @keyframes display-text{
+            25%,100%{
+                display: none;
+            }
+        }
+        @keyframes cursor{
+            10%{
+                border-right: 2px solid;
+                height: 0%;
+            }
+            50%{
+                border-right: 2px solid;
+                height: 80%;
+            }
+        }
+        .hero-intro{
+            font-size: clamp(0.8rem, 4vw, 1rem);
+        }
+        .social-icons{
+            display: flex;
+            max-width: fit-content;
+            gap: 10px;
+            bottom: 20px;
+        }
+        .social-icons a{
+            font-size: clamp(20px, 5vw, 30px);
+            transition: all 0.18s;
+            color: var(--muted);
+            border-radius: 100%;
+            padding: 3px 6px;
+        }
+        .social-icons a:hover{
+            transform: translateY(-2px);
+            color: var(--accent);
+        }
+
+        /* -- Icon hover --
+        .social-icons a:hover .fa-facebook-f:hover{
+            color: #009dff;
+            transition: all .18s ease;
+        }
+        .fa-telegram:hover{
+            color: #009dff;
+            transition: all .18s ease;
+        }
+        .fa-discord:hover{
+            color: #7b00ff;
+            transition: all .18s ease;
+        }
+        .fa-linkedin-in:hover{
+            color: #0088ff;
+            transition: all .18s ease;
+        }
+        .fa-github:hover{
+            color: #000000;
+            transition: all .18s ease;
+        }
+        */
+
+        .btn{
+            font-size: clamp(0.5rem, 3.5vw, 0.8rem);
+            padding: 1em 2em;
+            position: relative;
+            color: var(--muted);
+            background-color: var(--bg);
+            border-radius: 40px;
+            border: none;
+            transition: 0.18s;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn:hover{
+            box-shadow: -5px -3px 15px #00ffff, 5px 3px 15px #8a2be2;
+            color: var(--bg);
+            transition: 0.18s;
+            background: var(--text-gradient);
+            transform: translateY(-1px);
+        }
+        .btn:before{
+            content: "";
+            position: absolute;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            background: var(--text-gradient);
+            border-radius: 40px;
+            z-index: -1;
+        }
+        .btn::after{
+            content: "";
+            position: absolute;
+            background: var(--bg);
+            inset: .1px;
+            border-radius: 40px;
+            z-index: -1;
+        }
+        .btn:hover::after{
+            transition: 0.18s;
+            background: var(--text-gradient);
+        }
+
+        /* -- Former button styling 2
+        .btn{
+            padding: 1em 2em;
+            position: relative;
+            color: var(--muted);
+            background-color: var(--bg);
+            border-radius: 40px;
+            border: none;
+            transition: 0.5s;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn:hover{
+            box-shadow: -5px -3px 15px #00ffff, 5px 3px 15px #8a2be2;
+            color: var(--bg);
+            transition: 0.18s;
+            background: var(--text-gradient);
+        }
+        .btn:before{
+            content: "";
+            position: absolute;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            background: var(--text-gradient);
+            border-radius: 40px;
+            z-index: -1;
+        }
+        */
+
+        /* -- Old button styling--
+        .btn{
+            padding: 1em 2em;
+            position: relative;
+            color: var(--muted);
+            background-color: var(--bg);
+            border-radius: 40px;
+            border: none;
+            transition: 0.5s;
+            cursor: pointer;
+            transition: 0.75s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn::after{
+            content: "";
+            position: absolute;
+            width: 103%;
+            height: 107%;
+            border-radius: 40px;
+            background: var(--text-gradient);
+            transition: 0.75s;
+            z-index: -1;
+        }
+        .btn:hover::after{
+            z-index: 1;
+        }
+
+        --Glow-- 
+        .btn::before{
+            content: "";
+            background-image: var(--text-gradient);
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            background-size: 600%;
+            z-index: -1;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            filter: blur(8px);
+            transition: .3s ease-in-out;
+            border-radius: 1000px;
+            opacity: 0;
+        }
+        .btn:hover::before{
+            opacity: 1;
+            box-shadow: -10px -5px 30px #00ffff, 10px 5px 30px #8a2be2;
+        }
+        */
+
+        /* --About-- */
+        .about{
+            padding-top: 82px;
+        }
+        .about-content{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-evenly;
+            max-width: var(--max-width);
+            gap: 30px;
+        }
+        .about-text{
+            height: fit-content;
+            max-width: 400px;
+        }
+        .about-text .about-header{
+            font-size: clamp(1rem, 7vw, 2rem);
+        }
+        .about-text .about-paragraph{
+            font-size: clamp(0.8rem, 2vw, 1rem);
+        }
+        .about-text .read-more{
+            text-decoration: none;
+        }
+
+        /* -- SERVICES --*/
+        .services{
+            min-height: 100vh;
+            padding-top: 50px;
+            background-color: var(--bg);
+        }
+        .services-inner{
+            padding: 20px;
+            text-align: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .service-header{
+            position: relative;
+            padding: 0 2px;
+            width: fit-content;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 1.6px;
+            transition: all .18s ease;
+        }
+        .service-header::before {
+            content: "";
+            position: absolute;
+            width: 60%;
+            height: 8%;
+            top: 95%;
+            background: var(--text-gradient);
+            z-index: -1;
+            border-radius: 40px;
+        }
+        .service-card-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 0 auto;
+            padding: 20px 10px;
+        }
+        .service-card-container .cards {
+            max-width: 230px;
+            max-height: fit-content;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            border-radius: 20px;
+            background: var(--bg);
+            cursor: pointer;
+            transition: all .18s;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .cards::before{
+            content: "";
+            position: absolute;
+            background: var(--text-gradient);
+            height: 500px;
+            width: 170px;
+            z-index: 1;
+            animation: border-rotate 6s linear infinite;
+            opacity: 0
+        }
+        .cards:hover::before{
+            opacity: 1;
+            transition: all .18s;
+        }
+        .cards:hover {
+            transform: scale(1.02);
+            color: var(--accent);
+        }
+        .cards::after{
+            content: "";
+            position: absolute;
+            background: var(--bg);
+            inset: 2px;
+            z-index: 1;
+            border-radius: 18px;
+        }
+        @keyframes border-rotate {
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+        .cards h3{
+            font-size: clamp(0.5em, 5vw, 1.1em);
+            z-index: 2;
+            padding-bottom: 10px;
+        }
+        .cards p{
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            z-index: 2;
+        }
+        .cards .fas{
+            z-index: 2;
+            font-size: clamp(2em, 5vw, 2.3em);
+        }
+        .cards .btn{
+            padding: 0.6em 1.2em;
+            z-index: 2;
+        }
+        .cards .btn:hover::after{
+            transition: 0.18s;
+            background: var(--text-gradient);
+        }
+        /*
+        .services-inner{
+            display: contents;
+            align-items: center;
+            justify-content: space-evenly;
+            max-width: var(--max-width);
+            text-align: center;
+        }
+        .service-text{
+        }
+        .service-card-container{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            max-width: var(--max-width);
+            justify-content: space-evenly;
+            gap: 20px;
+        }
+        .cards{
+            height: fit-content;
+            width: 100px;
+            
+        }
+
+
+        .portfolio{
+            padding-top: 802px;
+            margin-top: 0;
+        }
+        */
+
+        /* -- Portfolio -- */
+        .portfolio{
+            min-height: 100vh;
+            padding-top: 50px;
+        }
+        .portfolio-inner{
+            padding: 0;
+            text-align: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .portfolio-header{
+            position: relative;
+            padding: 0 2px;
+            width: fit-content;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 1.6px;
+            transition: all .18s ease;
+        }
+        .portfolio-header::before {
+            content: "";
+            position: absolute;
+            width: 60%;
+            height: 8%;
+            top: 95%;
+            background: var(--text-gradient);
+            z-index: -1;
+            border-radius: 40px;
+        }
+
+        /* -- Portfolio sub-heading -- */
+        .portfolio-sub {
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            color: var(--muted-2);
+            margin-top: 16px;
+            margin-bottom: 32px;
+            max-width: 480px;
+            text-align: center;
+        }
+
+        /* -- Filter tabs -- */
+        .portfolio-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        .pf-tab {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            padding: 0.55em 1.4em;
+            border-radius: 40px;
+            border: none;
+            background: transparent;
+            color: var(--muted-2);
+            cursor: pointer;
+            transition: all 0.18s ease;
+            position: relative;
+        }
+        .pf-tab::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.18s ease;
+        }
+        .pf-tab:hover {
+            color: var(--muted);
+        }
+        .pf-tab.active {
+            color: var(--bg);
+            background: var(--text-gradient);
+        }
+        .pf-tab.active::before {
+            border-color: transparent;
+        }
+
+        /* -- Portfolio grid -- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            width: 100%;
+            max-width: 1100px;
+            padding: 0 10px 40px;
+        }
+
+        /* -- Portfolio card -- */
+        .portfolio-card {
+            background: var(--panel);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+        }
+        .portfolio-card.hidden {
+            display: none;
+        }
+
+        /* Card thumbnail band */
+        .pc-thumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 140px;
+            font-size: 2.4rem;
+            color: rgba(255,255,255,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .pc-thumb--design  { background: linear-gradient(135deg, #0d1f2d 0%, #1a0533 100%); }
+        .pc-thumb--web     { background: linear-gradient(135deg, #0d2d1f 0%, #032033 100%); }
+        .pc-thumb--video   { background: linear-gradient(135deg, #2d0d0d 0%, #33031a 100%); }
+        .pc-thumb--fashion { background: linear-gradient(135deg, #1f1a0d 0%, #2d1a03 100%); }
+
+        /* Card body */
+        .pc-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+        .pc-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .pc-title {
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1.3;
+        }
+        .pc-desc {
+            font-size: 0.82rem;
+            color: var(--muted-2);
+            line-height: 1.6;
+            flex: 1;
+        }
+        .pc-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-decoration: none;
+            color: var(--muted);
+            margin-top: 4px;
+            transition: color 0.18s ease, gap 0.18s ease;
+        }
+        .pc-link:hover {
+            color: var(--accent);
+            gap: 10px;
+        }
+
+        /* -- Portfolio grid responsive -- */
+        @media (max-width: 900px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 560px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* -- Contact -- */
+        .contact{
+            background-color: var(--bg);
+            min-height: 100vh;
+        }
+        .contact-inner{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+        .contact-header{
+            position: relative;
+            padding: 0 2px;
+            width: fit-content;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: 1.6px;
+            transition: all .18s ease;
+        }
+        .contact-header::before{
+            content: "";
+            position: absolute;
+            width: 60%;
+            height: 8%;
+            top: 95%;
+            background: var(--text-gradient);
+            z-index: -1;
+            border-radius: 40px;
+        }
+        /* Card Wrapper */
+        .cf-card {
+            background: var(--bg);
+            border-radius: 16px;
+            border: 1px solid rgba(166, 165, 165, 0.08);
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 560px;
+        }
+
+        /* Header */
+        .cf-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--muted);
+            line-height: 1.15;
+            margin-bottom: 6px;
+        }
+
+        .cf-sub {
+            font-size: 14px;
+            color: var(--muted-2);
+            margin-bottom: 0;
+        }
+
+        .cf-divider {
+            border: none;
+            border-top: 1px solid rgba(156, 156, 156, 0.08);
+            margin: 1.5rem 0;
+        }
+
+        /* Form fields */
+        .cf-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cf-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .cf-row { grid-template-columns: 1fr; }
+            .cf-card { padding: 2rem 1.25rem; }
+            .cf-title { font-size: 24px; }
+        }
+
+        .cf-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .cf-label {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .cf-label .optional {
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            color: var(--muted);
+        }
+
+        .cf-input,
+        .cf-textarea {
+            font-size: 15px;
+            padding: 11px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: var(--panel);
+            color: var(--accent);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+            width: 100%;
+        }
+
+        .cf-input::placeholder,
+        .cf-textarea::placeholder {
+            color: var(--muted-2);
+        }
+
+        .cf-input:hover,
+        .cf-textarea:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .cf-input:focus,
+        .cf-textarea:focus {
+            border-color: #7f77dd;
+            box-shadow: 0 0 0 3px rgba(127,119,221,0.15);
+        }
+
+        .cf-input.error,
+        .cf-textarea.error {
+            border-color: #e24b4a;
+            box-shadow: 0 0 0 3px rgba(226,75,74,0.12);
+        }
+
+        .cf-textarea {
+            resize: vertical;
+            min-height: 130px;
+            line-height: 1.6;
+        }
+
+        /* Error + Character counter */
+        .cf-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 16px;
+        }
+
+        .cf-error {
+            font-size: 12px;
+            color: #e24b4a;
+            display: none;
+        }
+
+        .cf-error.show { display: block; }
+
+        .cf-char {
+            font-size: 12px;
+            color: var(--muted-2);
+            margin-left: auto;
+        }
+
+        /* Footer / Submit */
+        .cf-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .cf-note {
+            font-size: 12px;
+            color: var(--muted-2);
+        }
+
+        .cf-btn {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            padding: 12px 30px 12px 20px;
+            border-radius: var(--radius);
+            border: none;
+            background: var(--text-gradient);
+            color: var(--bg);
+            cursor: pointer;
+            transition: background 0.18s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .cf-btn:hover  {
+            transition: all 0.18s;
+        }
+        .cf-btn:active { transform: scale(0.98); }
+
+        .cf-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Success Banner */
+        .cf-success {
+            display: none;
+            margin-top: 16px;
+            padding: 14px 18px;
+            border-radius: 8px;
+            background: #eaf3de;
+            border: 1px solid #97c459;
+            color: #3b6d11;
+            font-size: 14px;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cf-success.show { display: flex; }
+
+        /*  WhatsApp note */
+        .cf-wa-note {
+            margin-top: 14px;
+            font-size: 12px;
+            color: var(--muted-2); 
+            text-align: center;
+        }
+
+        .cf-wa-note svg {
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        /* -- OVERALL Responsiveness -- */
+        @media (max-width: 880px) {
+            body{
+                padding-top: 60px;
+            }
+            .site-nav{
+                height: 60px;
+            }
+            .container .nav-menu{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.7rem !important;
+                position: absolute;
+                height: 100vh;
+                width: 200px;
+                top: 0;
+                right: -100%;
+                padding: 5rem 1.5rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+                background-color: var(--bg);
+                transition: all 500ms ease-out;
+            }
+            .container .nav-menu.active{
+                display: flex;
+                right: 0%;
+            }
+            .nav-menu a::before, .nav-menu a:hover::before{
+                display: none;
+            }
+            .menubar-toggle{
+                display: block;
+                z-index: 999;
+            }
+            .menubar-toggle.active .bar:nth-child(2){
+                opacity: 0;
+            }
+            .menubar-toggle.active .bar:nth-child(1){
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menubar-toggle.active .bar:nth-child(3){
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            .chat-btn{
+                display: none;
+            }
+            .chat{
+                display: none;
+            }
+            .fa-comment{
+                transform: scale(2);
+            }
+            .floating-chat-btn{
+                display: flex;
+            }
+            .floating-chat-btn:hover{
+                color: var(--white);
+                background: var(--bg);
+                box-shadow: -5px -3px 15px #00ffff, 5px 3px 15px #8a2be2;
+            }
+            .hero{
+                padding-top: 60px;
+            }
+            .pic-frame{
+                animation: slidein-bottom 1s ease;
+            }
+            .intro_text{
+                animation: slidein-bottom 1s ease;
+            }
+            .cursor_text .text-show .hide{
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body id="home">
 
@@ -25,7 +1303,7 @@
             <a href="/" class="nav-logo gradient-text">STONEZ</a>
 
             <!-- Hamburger menu -->
-            <button class="menubar-toggle" aria-label="toggle-menubar" aria-label="Open Sidebar" aria-expanded="false" aria-controls="navbar">
+            <button class="menubar-toggle" aria-label="Open Sidebar" aria-expanded="false" aria-controls="navbar">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -36,10 +1314,12 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <button href="#contact" class="chat-btn" aria-label="let's chat" id="popup-btn">
-                    <span class="chat">Chat</span>
-                    <i class="fa-chisel fa-regular fa-comment"></i>
-                </button>
+                <li>
+                    <button href="#contact" class="chat-btn" aria-label="let's chat" id="popup-btn">
+                        <span class="chat">Chat</span>
+                        <i class="fa-regular fa-comment"></i>
+                    </button>
+                </li>
             </ul>
         </div>
     </nav>
@@ -47,7 +1327,7 @@
     <!-- Floating Chat button -->
     <a href="#contact" class="floating-chat-btn" aria-label="let's chat"  id="open-popup-btn">
         <span class="chat">Chat</span>
-        <i class="fa-chisel fa-regular fa-comment"></i>
+        <i class="fa-regular fa-comment"></i>
     </a>
 
     <main id="main">
@@ -71,14 +1351,14 @@
                     <p class="hero-intro">Please hold your breath as we dive into a world full of creativity with Tammy L Stonez.</p>
                     <br>
                     <div class="social-icons">
-                        <a href="www.google.com" class="facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="" class="telegram"><i class="fa-brands fa-telegram"></i></a>
-                        <a href="" class="discord"><i class="fa-brands fa-discord"></i></a>
-                        <a href="" class="linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="" class="github"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="telegram" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="#" class="discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+                        <a href="#" class="linkedin" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="github" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
                     </div>
                     <br>
-                    <button class="portfolio-btn btn" aria-label="portfolio-btn"><h3 class="btn-text">My Portfolio</h3></button>
+                    <button class="portfolio-btn btn" aria-label="View my portfolio"><span class="btn-text">My Portfolio</span></button>
                 </div>
             </div>
         </section>
@@ -97,7 +1377,7 @@
                         <br>
                         <p class="about_paragraph">Hello, I am Livingstone, and my nickname is (Tammy L Stonez). I am a student of the Outliers Technical Training Services. I live in Nigeria, Rivers State. I am an 18 year old web developer, passionate about creating and learning. I am an ambitious and disciplined person. I am a Senior Level Front-end developer, Graphics designer, Video Editor, and very enthusiastic to new technologies. I dream to build a Tech Institution where all who dream about going into tech can have their dream come true.</p>
                         <br>
-                        <a href="read-more"class="read-more"><button class="btn" aria-label="read-more"><h3>Read More</h3></button></a>
+                        <a href="#" class="read-more"><button class="btn" aria-label="Read more about me"><span>Read More</span></button></a>
                     </div>
                 </div>
             </div>
@@ -146,6 +1426,86 @@
             <div class="hero portfolio">
                 <div class="portfolio-inner">
                     <h3 class="gradient-text portfolio-header">Portfolio</h3>
+                    <p class="portfolio-sub">A selection of my recent work across design, development and video.</p>
+
+                    <!-- Filter Tabs -->
+                    <div class="portfolio-filters" role="tablist">
+                        <button class="pf-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
+                        <button class="pf-tab" data-filter="design" role="tab" aria-selected="false">Design</button>
+                        <button class="pf-tab" data-filter="web" role="tab" aria-selected="false">Web Dev</button>
+                        <button class="pf-tab" data-filter="video" role="tab" aria-selected="false">Video</button>
+                        <button class="pf-tab" data-filter="fashion" role="tab" aria-selected="false">Fashion</button>
+                    </div>
+
+                    <!-- Grid -->
+                    <div class="portfolio-grid">
+                        <div class="portfolio-card" data-category="design">
+                            <div class="pc-thumb pc-thumb--design">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div class="pc-body">
+                                <span class="pc-tag">Graphic Design</span>
+                                <h4 class="pc-title">Brand Identity – Sample Co.</h4>
+                                <p class="pc-desc">Logo, colour palette and brand guidelines for a fictional startup.</p>
+                                <a href="#" class="pc-link">View project <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="portfolio-card" data-category="web">
+                            <div class="pc-thumb pc-thumb--web">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="pc-body">
+                                <span class="pc-tag">Web Development</span>
+                                <h4 class="pc-title">Portfolio Website</h4>
+                                <p class="pc-desc">This very site — built from scratch with HTML, CSS and vanilla JS.</p>
+                                <a href="#" class="pc-link">View project <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="portfolio-card" data-category="video">
+                            <div class="pc-thumb pc-thumb--video">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="pc-body">
+                                <span class="pc-tag">Video Editing</span>
+                                <h4 class="pc-title">Promo Reel – Sample Project</h4>
+                                <p class="pc-desc">Short-form promotional video with colour grade and sound design.</p>
+                                <a href="#" class="pc-link">View project <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="portfolio-card" data-category="fashion">
+                            <div class="pc-thumb pc-thumb--fashion">
+                                <i class="fas fa-scissors"></i>
+                            </div>
+                            <div class="pc-body">
+                                <span class="pc-tag">Fashion Design</span>
+                                <h4 class="pc-title">Traditional Attire Collection</h4>
+                                <p class="pc-desc">Custom-made outfits blending traditional Nigerian styles with modern cuts.</p>
+                                <a href="#" class="pc-link">View project <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="portfolio-card" data-category="design">
+                            <div class="pc-thumb pc-thumb--design">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <div class="pc-body">
+                                <span class="pc-tag">Graphic Design</span>
+                                <h4 class="pc-title">Social Media Pack</h4>
+                                <p class="pc-desc">Set of post templates, story frames and banners for an Instagram brand.</p>
+                                <a href="#" class="pc-link">View project <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="portfolio-card" data-category="web">
+                            <div class="pc-thumb pc-thumb--web">
+                                <i class="fas fa-mobile-screen"></i>
+                            </div>
+                            <div class="pc-body">
+                                <span class="pc-tag">Web Development</span>
+                                <h4 class="pc-title">Responsive Landing Page</h4>
+                                <p class="pc-desc">Mobile-first landing page with animations and a contact form.</p>
+                                <a href="#" class="pc-link">View project <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div><!-- end portfolio-grid -->
                 </div>
             </div>
         </section>
@@ -239,6 +1599,180 @@
     </main>
 
     <!-- JavaScript -->
-    <script src="/script.js" defer></script>
+    <script>
+        const menubarToggle = document.querySelector('.menubar-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const overlay = document.querySelector('.menu-overlay');
+        const media = window.matchMedia("(width < 880px)");
+
+        // 1. Centralized logic to handle inert state
+        function updateInertState() {
+        const isMobile = media.matches;
+        const isMenuOpen = navMenu.classList.contains('active');
+
+        if (isMobile) {
+            if (isMenuOpen) {
+            // Mobile Open
+            navMenu.removeAttribute('inert');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+            else {
+            // Mobile Closed
+            navMenu.setAttribute('inert', '');
+            overlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+            }
+        }
+        else {
+            // Desktop Mode
+            navMenu.removeAttribute('inert');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        }
+
+        // 2. Toggle Button Click
+        menubarToggle.addEventListener('click', () => {
+        menubarToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+                    
+        // Re-evaluate inert state every time we toggle
+        updateInertState();
+        });
+
+        // 3. Overlay Click (closes menu)
+        overlay.addEventListener('click', () => {
+        menubarToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        updateInertState();
+        });
+
+        // 4. Close menu when a link is clicked
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (media.matches) {
+            menubarToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+            updateInertState();
+            }
+        });
+        });
+
+        // 5. Handle window resizing
+        media.addEventListener('change', updateInertState);
+
+        // Initial check on page load
+        window.addEventListener('DOMContentLoaded', updateInertState);
+
+
+        /* --   OVERALL CONTACT SECTION BEHAVIOR -- */
+
+        /* ── Character counter ───────── */
+        const msgEl  = document.getElementById('cf-msg');
+        const charEl = document.getElementById('cf-char');
+        msgEl.addEventListener('input', () => {
+        charEl.textContent = msgEl.value.length + ' / 1000';
+        });
+
+        /* ── Validation ────────── */
+        function validate() {
+        let ok = true;
+        const nameEl  = document.getElementById('cf-name');
+        const emailEl = document.getElementById('cf-email');
+
+        // clear previous state
+        [nameEl, emailEl, msgEl].forEach(el => el.classList.remove('error'));
+        ['err-name','err-email','err-msg'].forEach(id =>
+            document.getElementById(id).classList.remove('show')
+        );
+
+        if (!nameEl.value.trim()) {
+            nameEl.classList.add('error');
+            document.getElementById('err-name').classList.add('show');
+            ok = false;
+        }
+
+        const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRx.test(emailEl.value.trim())) {
+            emailEl.classList.add('error');
+            document.getElementById('err-email').classList.add('show');
+            ok = false;
+        }
+
+        if (msgEl.value.trim().length < 20) {
+            msgEl.classList.add('error');
+            document.getElementById('err-msg').classList.add('show');
+            ok = false;
+        }
+
+        return ok;
+        }
+
+        /* ── Submit → WhatsApp ────────────────────────────── */
+        function submitForm() {
+            if (!validate()) return;
+
+            const btn = document.getElementById('cf-submit');
+            btn.disabled = true;
+            btn.textContent = 'Opening WhatsApp…';
+
+            const PHONE = '2349155101626';
+
+            const name    = document.getElementById('cf-name').value.trim();
+            const email   = document.getElementById('cf-email').value.trim();
+            const subject = document.getElementById('cf-subject').value.trim();
+            const message = msgEl.value.trim();
+
+            const text = [
+                '👋 New message from your portfolio!',
+                '',
+                `🧑 Name:    ${name}`,
+                `📧 Email:   ${email}`,
+                subject ? `📌 Subject: ${subject}` : null,
+                '',
+                `💬 Message:\n${message}`,
+            ].filter(line => line !== null).join('\n');
+
+            const waURL = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
+
+            /* Show success banner, then open WhatsApp */
+            const form = document.getElementById('cfform');
+            form.style.opacity        = '0.4';
+            form.style.pointerEvents  = 'none';
+            document.getElementById('cf-success').classList.add('show');
+
+            setTimeout(() => window.open(waURL, '_blank'), 800);
+        }
+
+        /* -- END OF OVERALL CONTACT SECTION BEHAVIOUR -- */
+
+
+        /* -- PORTFOLIO FILTER TABS -- */
+        const pfTabs  = document.querySelectorAll('.pf-tab');
+        const pfCards = document.querySelectorAll('.portfolio-card');
+
+        pfTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                pfTabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+
+                const filter = tab.dataset.filter;
+
+                // Show / hide cards
+                pfCards.forEach(card => {
+                    const match = filter === 'all' || card.dataset.category === filter;
+                    card.classList.toggle('hidden', !match);
+                });
+            });
+        });
+        /* -- END OF PORTFOLIO FILTER TABS -- */
+    </script>
 </body>
 </html>
