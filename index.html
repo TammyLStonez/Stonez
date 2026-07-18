@@ -7,7 +7,7 @@
     <meta name="background-color" content="#0e0e0e"><!-- Background color for PWA -->
     <link rel="icon" type="image/x-icon" href="stonezfavicon.ico"><!-- Favicon -->
     <title>Livingstone's Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- Font Awesome 6.5.2 CDN -->
     <link rel="manifest" href="/site.webmanifest"><!-- Web Manifest for PWA -->
 </head>
@@ -21,7 +21,7 @@
 
     <!-- Navigation Bar -->
     <nav class="site-nav">
-        <div class="container nav-inner">
+        <div class="container">
             <a href="/" class="nav-logo gradient-text">STONEZ</a>
 
             <!-- Hamburger menu -->
@@ -36,19 +36,12 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <div id="chat-btn">
-                    <a class="chat-btn" aria-label="let's chat">
-                        <span class="chat">Chat</span>
-                        <i class="fa-regular fa-comment"></i>
-                    </a>
-                </div>
             </ul>
         </div>
     </nav>
 
     <!-- Floating Chat button -->
     <a href="#contact" class="floating-chat-btn" aria-label="let's chat">
-        <span class="chat">Chat</span>
         <i class="fa-regular fa-comment"></i>
     </a>
 
@@ -65,15 +58,15 @@
                     <h2>Hello, It's Me</h2>
                     <h1>Tammy L Stonez</h1>
                     <h2 class="cursor_text">I'm a
-                        <span class="text-show web-dev">FrontEnd Web Dev<span class="hide">eloper</span></span>
+                        <span class="text-show gradient-text">FrontEnd Web Dev<span class="hide">eloper</span></span>
                     </h2>
-                    <p class="hero-intro">Please hold your breath as we dive into a world full of creativity with Tammy L Stonez.</p>
+                    <p class="hero-p">Please hold your breath as we dive into a world full of creativity with Tammy L Stonez.</p>
                     <br>
                     <div class="social-icons">
                         <a href="#" class="reddit" aria-label="Reddit"><i class="fa-brands fa-reddit"></i></a>
-                        <a href="#" class="discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
-                        <a href="#" class="linkedin" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" class="github" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://x.com/livingston73539" target="_blank" class="x" aria-label="X: Formerly known as Twitter"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="https://www.linkedin.co    m/in/tammy-l-stonez" target="_blank" class="linkedin" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://github.com/TammyLStonez" target="_blank" class="github" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
                     </div>
                     <br>
                     <div class="cta">
@@ -96,7 +89,7 @@
                     <div class="about-text">
                         <h1 class="about-header">About <span class="gradient-text">Me</span></h1>
                         <br>
-                        <p class="about_paragraph">I'm Livingstone, a Front-end developer who builds tools that makes work easier.I don't just write code, I solve problems. When an Educational Organisation needed a faster way to convert LaTeX equations in their transcribed documents to Unicode, I built <strong>EQConvert</strong>, a web app that let's the upload files, converts every equation automatically with real-time logs, and hands back a clean document. What used to be hours of manual formatting now takes seconds. That's the kind of work I do: identify the friction, build the fix, and measure it by the time and stress it saves. If you have a workflow problem that a well-built web tool could solve, I'd like to hear about it.</p>
+                        <p class="about_paragraph">I'm Livingstone, a Front-end developer who builds tools that makes work easier.I don't just write code, I solve problems. When an Educational Organisation needed a faster way to convert LaTeX equations in their transcribed documents to Unicode, I built <strong>EQConvert</strong>, a web app that allows users upload files, converts every equation automatically with real-time logs, and hands back a clean document. What used to be hours of manual formatting now takes seconds. That's the kind of work I do: identify the friction, build the fix, and measure it by the time and stress it saves. If you have a workflow problem that a well-built web tool could solve, I'd like to hear about it.</p>
                         <br>
                         <a href="#" class="read-more"><button class="btn" aria-label="Read more about me">Read More</button></a>
                     </div>
@@ -109,35 +102,28 @@
                     <h3 class="gradient-text service-header">Services</h3>
                     <div class="service-card-container">
                         <div class="service-card1 cards">
-                            <i class="fas fa-paint-brush fa-3x"></i><!-- Graphics Design icon -->
-                            <h3>Graphic Design</h3>
+                            <i class="fas fa-code fa-3x"></i><!-- Code icon -->
+                            <h3>Web Development</h3>
                             <p class="card-text">
-                                Eye-catching logos, flyers, banners and branding that make your business stand out and speak loud without saying a word.
+                                Fast responsive websites and webapps biult for real-world problems.
                             </p>
-                            <br>
-                            <button class="s-btn">See More</button>
                         </div>
                         <div class="service-card2 cards">
-                            <i class="fas fa-scissors fa-3x"></i><!-- Tailoring icon -->
-                            <h3 class="card-herder">Fashion Design</h3>
+                            <i class="fas fa-wrench fa-3x"></i><!-- Wrench icon -->
+                            <h3 class="card-herder">Web Tool Development</h3>
                             <p class="card-text">
-                                Custom-made outfits crafted with precision and style – from traditional attires to modern fashion, I bring your dream look to life.</p>
-                            <br>
-                            <button class="s-btn">See More</button>
+                                Custom browser-based tools that automate repetitive workflows.
+                            </p>
                         </div>
                         <div class="service-card3 cards">
-                            <i class="fas fa-code fa-3x"></i><!-- Web Development icon -->
-                            <h3 class="card-herder" >Web Development</h3>
-                            <p class="card-text">Fast, responsive and beautiful websites that work perfectly on phone, tablet and desktop. Your online presence, built right.</p>
-                            <br>
-                            <button class="s-btn">See More</button>
+                            <i class="fas fa-layout fa-3x"></i><!-- Web Development icon -->
+                            <h3 class="card-herder" >Landing Page Design</h3>
+                            <p class="card-text">Clean conversion-focused landing pages for businesses and products.</p>
                         </div>
                         <div class="service-card4 cards">
-                            <i class="fas fa-video fa-3x"></i><!-- Video Editing icon -->
-                            <h3 class="card-herder" >Video Editing</h3>
-                            <p class="card-text">Professional cuts, smooth transitions, colour grading and sound design – turning raw footage into videos that people actually watch till the end.</p>
-                            <br>
-                            <button class="s-btn">See More</button>
+                            <i class="fa-duotone fa-solid fa-gears"></i><!-- Video Editing icon -->
+                            <h3 class="card-herder" >Website Maintenance & Fixes</h3>
+                            <p class="card-text">Bug fixes, speed improvements, and updates for existing websites.</p>
                         </div>
                     </div>
                 </div>
@@ -149,28 +135,8 @@
                     <h3 class="gradient-text portfolio-header">Portfolio</h3>
                     <p class="portfolio-sub">A selection of my recent work across design, development and video.</p>
 
-                    <!-- Filter Tabs -->
-                    <div class="portfolio-filters" role="tablist">
-                        <button class="pf-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
-                        <button class="pf-tab" data-filter="design" role="tab" aria-selected="false">Design</button>
-                        <button class="pf-tab" data-filter="web" role="tab" aria-selected="false">Web Dev</button>
-                        <button class="pf-tab" data-filter="video" role="tab" aria-selected="false">Video</button>
-                        <button class="pf-tab" data-filter="fashion" role="tab" aria-selected="false">Fashion</button>
-                    </div>
-
                     <!-- Grid -->
                     <div class="portfolio-grid">
-                        <div class="portfolio-card" data-category="design">
-                            <div class="pc-thumb pc-thumb--design">
-                                <i class="fas fa-paint-brush"></i>
-                            </div>
-                            <div class="pc-body">
-                                <span class="pc-tag">Graphic Design</span>
-                                <h4 class="pc-title">Brand Identity – Sample Co.</h4>
-                                <p class="pc-desc">Logo, colour palette and brand guidelines for a fictional startup.</p>
-                                <a href="#" class="pc-link">View project <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
                         <div class="portfolio-card" data-category="web">
                             <div class="pc-thumb pc-thumb--web">
                                 <i class="fas fa-code"></i>
@@ -178,41 +144,8 @@
                             <div class="pc-body">
                                 <span class="pc-tag">Web Development</span>
                                 <h4 class="pc-title">EQConvert</h4>
-                                <p class="pc-desc">THis is a LaTeX to Unicode math notation</p>
+                                <p class="pc-desc">A web app buit for an Educational Organization that needed to convert LaTeX math equations in word documents to Unicode automatically. What used to take hours of manual formatting now takes seconds. Built with HTML, CSS, Javascript, and Firebase. Live and in active use</p>
                                 <a href="https://eqconvert.netlify.app" class="pc-link">View project <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="portfolio-card" data-category="video">
-                            <div class="pc-thumb pc-thumb--video">
-                                <i class="fas fa-video"></i>
-                            </div>
-                            <div class="pc-body">
-                                <span class="pc-tag">Video Editing</span>
-                                <h4 class="pc-title">Promo Reel – Sample Project</h4>
-                                <p class="pc-desc">Short-form promotional video with colour grade and sound design.</p>
-                                <a href="#" class="pc-link">View project <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="portfolio-card" data-category="fashion">
-                            <div class="pc-thumb pc-thumb--fashion">
-                                <i class="fas fa-scissors"></i>
-                            </div>
-                            <div class="pc-body">
-                                <span class="pc-tag">Fashion Design</span>
-                                <h4 class="pc-title">Traditional Attire Collection</h4>
-                                <p class="pc-desc">Custom-made outfits blending traditional Nigerian styles with modern cuts.</p>
-                                <a href="#" class="pc-link">View project <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="portfolio-card" data-category="design">
-                            <div class="pc-thumb pc-thumb--design">
-                                <i class="fas fa-layer-group"></i>
-                            </div>
-                            <div class="pc-body">
-                                <span class="pc-tag">Graphic Design</span>
-                                <h4 class="pc-title">Social Media Pack</h4>
-                                <p class="pc-desc">Set of post templates, story frames and banners for an Instagram brand.</p>
-                                <a href="#" class="pc-link">View project <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                         <div class="portfolio-card" data-category="web">
