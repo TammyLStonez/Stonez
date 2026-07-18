@@ -8,8 +8,8 @@ Built with plain HTML, CSS, and JavaScript — no framework, no build step.
 
 - **Home** — intro and quick links
 - **About** — background and approach to solving problems through web tools (e.g. [EQConvert](https://github.com/TammyLStonez/EQConvert))
-- **Services** — Graphic Design, Fashion Design, Web Development, Video Editing
-- **Portfolio** — filterable project showcase across design, development, video, and fashion work
+- **Services** — Web Development, Web Tool Development, Landing Page Design, Websit Maintenance and Fixes.
+- **Portfolio** — filterable project showcase
 - **Contact** — message form that delivers via WhatsApp
 
 ## Tech Stack
@@ -28,4 +28,4 @@ No build step or dependencies — open `index.html` directly in a browser, or se
 
 ## Deployment
 
-Auto-deploys to Netlify on every push to `main`.
+Auto-deploys to Netlify on every push to `master`.
